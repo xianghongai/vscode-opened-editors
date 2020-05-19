@@ -1,6 +1,6 @@
 # VSCode Opened Editors
 
-![ScreenShots](https://raw.githubusercontent.com/caringrun/assets/master/vscode-opened-editors-screenshots.gif)
+![ScreenShots](https://user-images.githubusercontent.com/58411528/82288592-692f1b00-99d5-11ea-8f28-5bcbd052e95b.gif)
 
 - `File: Reveal Active File in Side Bar`
 - `View: Quick Open Previous Recently Used Editor in Group`
