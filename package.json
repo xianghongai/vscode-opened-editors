@@ -21,7 +21,7 @@
     "onCommand:reveal.sidebar",
     "onCommand:opened.editors"
   ],
-  "main": "./out/extension.js",
+  "main": "./snippets/extension.js",
   "contributes": {
     "configuration": {
       "title": "Opened Editors",
