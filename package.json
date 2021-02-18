@@ -4,7 +4,7 @@
   "displayName": "Opened Editors",
   "description": "quick open navigate previous in editor picker, and reveal in side bar",
   "icon": "art/icon.png",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,55 +18,111 @@
   ],
   "activationEvents": [
     "*",
-    "onCommand:reveal.sidebar",
-    "onCommand:opened.editors"
+    "onCommand:opened-editors.revealSidebar",
+    "onCommand:opened-editors.openedEditors"
   ],
   "main": "./snippets/extension.js",
   "contributes": {
     "configuration": {
       "title": "Opened Editors",
       "properties": {
-        "reveal.enable": {
+        "opened-editors.revealSidebar": {
+          "scope": "resource",
           "type": "boolean",
           "default": true,
           "description": "Reveal In Side Bar"
         },
-        "editors.enable": {
+        "opened-editors.openedEditors": {
+          "scope": "resource",
           "type": "boolean",
           "default": true,
           "description": "Quick Open Navigate Previous In Editor Picker"
+        },
+        "opened-editors.copyFileName": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "Copy File Name"
+        },
+        "opened-editors.copyFolderName": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "Copy Folder Name"
         }
       }
     },
     "commands": [
       {
-        "command": "reveal.sidebar",
-        "title": "Reveal In Side Bar",
+        "command": "opened-editors.revealSidebar",
+        "title": "Opened Editors: Reveal In Side Bar",
         "icon": {
           "light": "art/reveal-gray.svg",
           "dark": "art/reveal-white.svg"
         }
       },
       {
-        "command": "opened.editors",
-        "title": "Opened Editors",
+        "command": "opened-editors.openedEditors",
+        "title": "Opened Editors: Opened Editors",
         "icon": {
           "light": "art/dropdown-gray.svg",
           "dark": "art/dropdown-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyPathName",
+        "title": "Opened Editors: Copy Path Name",
+        "icon": {
+          "light": "art/folder-gray.svg",
+          "dark": "art/folder-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyFolderName",
+        "title": "Opened Editors: Copy Folder Name",
+        "icon": {
+          "light": "art/folder-gray.svg",
+          "dark": "art/folder-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyFileName",
+        "title": "Opened Editors: Copy File Name",
+        "icon": {
+          "light": "art/file-gray.svg",
+          "dark": "art/file-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyFileNameWithExtension",
+        "title": "Opened Editors: Copy File Name With Extension",
+        "icon": {
+          "light": "art/file-gray.svg",
+          "dark": "art/file-white.svg"
         }
       }
     ],
     "menus": {
       "editor/title": [
         {
-          "command": "reveal.sidebar",
+          "command": "opened-editors.revealSidebar",
           "group": "navigation@1",
-          "when": "config.reveal.enable"
+          "when": "config.opened-editors.revealSidebar"
         },
         {
-          "command": "opened.editors",
+          "command": "opened-editors.openedEditors",
           "group": "navigation@2",
-          "when": "config.editors.enable"
+          "when": "config.opened-editors.openedEditors"
+        },
+        {
+          "command": "opened-editors.copyFileName",
+          "group": "navigation@3",
+          "when": "config.opened-editors.copyFileName"
+        },
+        {
+          "command": "opened-editors.copyFolderName",
+          "group": "navigation@4",
+          "when": "config.opened-editors.copyFolderName"
         }
       ]
     }

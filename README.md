@@ -20,12 +20,17 @@
   </a>
 </p>
 
-![ScreenShots](https://user-images.githubusercontent.com/58411528/82288592-692f1b00-99d5-11ea-8f28-5bcbd052e95b.gif)
+![ScreenShots](https://raw.githubusercontent.com/caringrun/assets/master/vscode-opened-editors.gif)
 
-- `File: Reveal Active File in Side Bar`
-- `View: Quick Open Previous Recently Used Editor in Group`
+- `Opened Editors: Reveal In Side Bar` - 文件在侧边栏资源中的位置
+- `Opened Editors: Opened Editors` - 已打开编辑器列表
+- `Opened Editors: Copy Path Name` - 复制父层路径，可选择不同层级
+- `Opened Editors: Copy Folder Name` - 复制父层文件夹，可选择不同层级
+- `Opened Editors: Copy File Name` - 复制文件名
+- `Opened Editors: Copy File Name With Extension` - 复制文件名带后缀
 
 ---
 
-- 定位文件在侧边栏中的位置
-- 已打开编辑器列表
+## License 📃
+
+MIT License
