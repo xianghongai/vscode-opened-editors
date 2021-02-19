@@ -30,7 +30,7 @@ const copyPath = (args: any, mode = 'path') => {
       placeHolder: mode !== 'path' ? 'copy folder name:' : 'copy path name:',
     })
     .then(
-      (folder) => {
+      (folder: string) => {
         if (folder) {
           let _folder = folder;
           if (mode !== 'path') {
@@ -40,8 +40,8 @@ const copyPath = (args: any, mode = 'path') => {
           vscode.env.clipboard.writeText(_folder);
         }
       },
-      (reason) => {
-        console.log(reason);
+      (reason: any) => {
+        vscode.window.showErrorMessage(reason);
       }
     );
 };
@@ -136,5 +136,8 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {
-  console.log('Opened Editors extension disabled');
+  // vscode.window.setStatusBarMessage(
+  //   '"Opened Editors" extension disabled',
+  //   3000
+  // );
 }
