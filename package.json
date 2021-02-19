@@ -2,26 +2,41 @@
   "name": "vscode-opened-editors",
   "publisher": "NicholasHsiang",
   "displayName": "Opened Editors",
-  "description": "quick open navigate previous in editor picker, and reveal in side bar",
+  "description": "quick open navigate previous in editor picker, and reveal in side bar, and copy path/folder/file name...",
   "icon": "art/icon.png",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/xianghongai/vscode-opened-editors/"
   },
   "engines": {
-    "vscode": "^1.41.0"
+    "vscode": "^1.53.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "*",
-    "onCommand:opened-editors.revealSidebar",
-    "onCommand:opened-editors.openedEditors"
+  "keywords": [
+    "reveal sidebar",
+    "opened editors",
+    "path name",
+    "pathname",
+    "folder name",
+    "file name",
+    "filename",
+    "copy path name",
+    "copy folder name",
+    "copy file name"
   ],
-  "main": "./snippets/extension.js",
+  "activationEvents": [
+    "onCommand:opened-editors.revealSidebar",
+    "onCommand:opened-editors.openedEditors",
+    "onCommand:opened-editors.copyPathName",
+    "onCommand:opened-editors.copyFolderName",
+    "onCommand:opened-editors.copyFileName",
+    "onCommand:opened-editors.copyFileNameWithExtension"
+  ],
+  "main": "./out/extension.js",
   "contributes": {
     "configuration": {
       "title": "Opened Editors",
@@ -128,21 +143,25 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile",
-    "build": "npm run vscode:prepublish && vsce package"
+    "vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js",
+    "package": "npm run vscode:prepublish && vsce package"
   },
   "devDependencies": {
-    "@types/glob": "^7.1.1",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.11.7",
-    "@types/vscode": "^1.41.0",
-    "glob": "^7.1.5",
-    "mocha": "^6.2.2",
-    "typescript": "^3.6.4",
-    "tslint": "^5.20.0",
-    "vscode-test": "^1.2.2"
+		"@types/vscode": "^1.53.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^12.11.7",
+		"eslint": "^7.19.0",
+		"@typescript-eslint/eslint-plugin": "^4.14.1",
+		"@typescript-eslint/parser": "^4.14.1",
+		"glob": "^7.1.6",
+		"mocha": "^8.2.1",
+		"typescript": "^4.1.3",
+		"vscode-test": "^1.5.0"
   }
 }

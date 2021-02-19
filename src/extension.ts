@@ -30,7 +30,7 @@ const copyPath = (args: any, mode = 'path') => {
       placeHolder: mode !== 'path' ? 'copy folder name:' : 'copy path name:',
     })
     .then(
-      (folder: string) => {
+      (folder: any) => {
         if (folder) {
           let _folder = folder;
           if (mode !== 'path') {
@@ -80,7 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       'opened-editors.copyPathName',
-      (...args) => {
+      (...args: any) => {
         if (!precondition()) {
           return;
         }
@@ -93,7 +93,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       'opened-editors.copyFolderName',
-      (...args) => {
+      (...args: any) => {
         if (!precondition()) {
           return;
         }
@@ -106,7 +106,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       'opened-editors.copyFileName',
-      (...args) => {
+      (...args: any) => {
         if (!precondition()) {
           return;
         }
@@ -122,7 +122,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       'opened-editors.copyFileNameWithExtension',
-      (...args) => {
+      (...args: any) => {
         if (!precondition()) {
           return;
         }
