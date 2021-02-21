@@ -4,7 +4,7 @@
   "displayName": "Opened Editors",
   "description": "quick open navigate previous in editor picker, and reveal in side bar, and copy path/folder/file name...",
   "icon": "art/icon.png",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "onCommand:opened-editors.copyPathName",
     "onCommand:opened-editors.copyFolderName",
     "onCommand:opened-editors.copyFileName",
-    "onCommand:opened-editors.copyFileNameWithExtension"
+    "onCommand:opened-editors.copyFileNameWithExtension",
+    "onCommand:opened-editors.fileTreeGenerator"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -45,25 +46,44 @@
           "scope": "resource",
           "type": "boolean",
           "default": true,
-          "description": "Reveal In Side Bar"
+          "description": "%opened-editors.revealSidebarDesc%"
         },
         "opened-editors.openedEditors": {
           "scope": "resource",
           "type": "boolean",
           "default": true,
-          "description": "Quick Open Navigate Previous In Editor Picker"
+          "description": "%opened-editors.openedEditorsDesc%"
         },
         "opened-editors.copyFileName": {
           "scope": "resource",
           "type": "boolean",
           "default": true,
-          "description": "Copy File Name"
+          "description": "%opened-editors.copyFileNameDesc%"
         },
         "opened-editors.copyFolderName": {
           "scope": "resource",
           "type": "boolean",
           "default": true,
-          "description": "Copy Folder Name"
+          "description": "%opened-editors.copyFolderNameDesc%"
+        },
+        "opened-editors.fileTreeExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".*"
+          ],
+          "markdownDescription": "%opened-editors.fileTreeExcludeDesc%"
+        },
+        "opened-editors.fileTreeExportType": {
+          "type": "string",
+          "default": "markdown",
+          "enum": [
+            "markdown",
+            "txt"
+          ],
+          "markdownDescription": "%opened-editors.fileTreeExportTypeDesc%"
         }
       }
     },
@@ -115,9 +135,20 @@
           "light": "art/file-gray.svg",
           "dark": "art/file-white.svg"
         }
+      },
+      {
+        "command": "opened-editors.fileTreeGenerator",
+        "title": "%opened-editors.fileTreeGenerator%"
       }
     ],
     "menus": {
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "opened-editors.fileTreeGenerator",
+          "group": "9_cutcopypaste"
+        }
+      ],
       "editor/title": [
         {
           "command": "opened-editors.revealSidebar",
@@ -144,24 +175,29 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
     "package": "npm run vscode:prepublish && vsce package"
   },
   "devDependencies": {
-		"@types/vscode": "^1.53.0",
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.4",
-		"@types/node": "^12.11.7",
-		"eslint": "^7.19.0",
-		"@typescript-eslint/eslint-plugin": "^4.14.1",
-		"@typescript-eslint/parser": "^4.14.1",
-		"glob": "^7.1.6",
-		"mocha": "^8.2.1",
-		"typescript": "^4.1.3",
-		"vscode-test": "^1.5.0"
+    "@types/fs-extra": "^9.0.7",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.53.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "fs-extra": "^9.1.0",
+    "ignore": "^5.1.8"
   }
 }

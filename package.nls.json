@@ -1,0 +1,10 @@
+{
+  "opened-editors.fileTreeGenerator": "File Tree Generator",
+  "opened-editors.revealSidebarDesc": "Controls whether opened editors reveal in the editor title menu",
+  "opened-editors.openedEditorsDesc": "Controls whether show opened editors in the editor title menu",
+  "opened-editors.copyFileNameDesc": "Controls whether the copy file name in the editor title menu",
+  "opened-editors.copyFolderNameDesc": "Controls whether the copy folder name in the editor title menu",
+  "opened-editors.fileTreeExcludeDesc": "Configure glob patterns for excluding files and folders.",
+  "opened-editors.fileTreeExportTypeDesc": "The generated format, `markdown` or `txt` plain text",
+  "opened-editors.fileTreeHasBeenCopied": "The file tree has been copied to the clipboard :)"
+}
