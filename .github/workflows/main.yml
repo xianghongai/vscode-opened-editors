@@ -22,23 +22,6 @@ jobs:
           node-version: 12
       - name: Install Dependencies
         run: npm install
-      - run: |
-          npm run compile
-
-  publish:
-    name: Publish Github Action
-    needs:
-    - build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Source
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Install Dependencies
-        run: npm install
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v0
         with:
