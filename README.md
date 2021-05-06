@@ -29,6 +29,14 @@
 - `Opened Editors: Copy File Name` - 复制文件名
 - `Opened Editors: Copy File Name With Extension` - 复制文件名带后缀
 
++ `File Tree Generator` - 侧边栏右键复制目录树结构
+
+---
+
+Rename the extension to "VS Code Explorer Kit"?
+
+扩展重命名为 “VS Code Explorer Kit” ？
+
 ---
 
 ## License 📃
