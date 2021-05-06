@@ -4,7 +4,7 @@
   "displayName": "Opened Editors",
   "description": "quick open navigate previous in editor picker, and reveal in side bar, and copy path/folder/file name...",
   "icon": "art/icon.png",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -180,7 +180,7 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "package": "npm run vscode:prepublish && vsce package"
+    "build": "npm run vscode:prepublish && vsce package"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.7",
