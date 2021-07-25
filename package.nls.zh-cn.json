@@ -6,5 +6,11 @@
   "opened-editors.copyFolderNameDesc": "禁止/启用 Title 菜单图标按钮——复制当前打开文档的目录名 (可选择父层)",
   "opened-editors.fileTreeExcludeDesc": "生成文件结构树时，要排除的文件和文件夹，基于 `.gitignore`，并默认排除 `.*` 目录和文件",
   "opened-editors.fileTreeExportTypeDesc": "生成文件结构树的格式，`MarkDown` (*) 或者 `TXT` 纯文本",
-  "opened-editors.fileTreeHasBeenCopied": "文件树已复制到剪贴板 :)"
+  "opened-editors.fileTreeHasBeenCopied": "文件树已复制到剪贴板 :)",
+  "opened-editors.revealSidebar": "Opened Editors: 在侧边栏中显示",
+  "opened-editors.openedEditors": "Opened Editors: 打开的编辑器列表",
+  "opened-editors.copyPathName": "Opened Editors: 复制文件路径名",
+  "opened-editors.copyFileNameWithExtension": "Opened Editors: 复制文件名 (含扩展名)",
+  "opened-editors.copyFolderName": "Opened Editors: 复制目录名",
+  "opened-editors.copyFileName": "Opened Editors: 复制文件名"
 }

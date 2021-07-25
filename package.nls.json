@@ -6,5 +6,11 @@
   "opened-editors.copyFolderNameDesc": "Controls whether the copy folder name in the editor title menu",
   "opened-editors.fileTreeExcludeDesc": "Configure glob patterns for excluding files and folders.",
   "opened-editors.fileTreeExportTypeDesc": "The generated format, `markdown` or `txt` plain text",
-  "opened-editors.fileTreeHasBeenCopied": "The file tree has been copied to the clipboard :)"
+  "opened-editors.fileTreeHasBeenCopied": "The file tree has been copied to the clipboard :)",
+  "opened-editors.revealSidebar": "Opened Editors: Reveal In Side Bar",
+  "opened-editors.openedEditors": "Opened Editors: Opened Editors",
+  "opened-editors.copyPathName": "Opened Editors: Copy Path Name",
+  "opened-editors.copyFileNameWithExtension": "Opened Editors: Copy File Name With Extension",
+  "opened-editors.copyFolderName": "Opened Editors: Copy Folder Name",
+  "opened-editors.copyFileName": "Opened Editors: Copy File Name"
 }
