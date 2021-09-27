@@ -12,5 +12,9 @@
   "opened-editors.copyPathName": "Opened Editors: 复制文件路径名",
   "opened-editors.copyFileNameWithExtension": "Opened Editors: 复制文件名 (含扩展名)",
   "opened-editors.copyFolderName": "Opened Editors: 复制目录名",
-  "opened-editors.copyFileName": "Opened Editors: 复制文件名"
+  "opened-editors.copyFileName": "Opened Editors: 复制文件名",
+  "opened-editors.foldEnableDesc": "禁止/启用 Title 菜单图标按钮——折叠/展开",
+  "opened-editors.fold": "Opened Editors: 折叠",
+  "opened-editors.unfold": "Opened Editors: 展开",
+  "opened-editors.foldDesc": "Opened Editors: 折叠层级"
 }

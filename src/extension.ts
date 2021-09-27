@@ -8,6 +8,11 @@ import {
   copyFileNameWithExtension,
 } from './modules/path';
 
+import {
+  foldHandler,
+  unfoldHandler,
+} from './modules/fold';
+
 import { fileTreeGenerator } from './modules/file-tree';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -44,6 +49,16 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('opened-editors.fileTreeGenerator', fileTreeGenerator)
+  );
+
+  // prettier-ignore
+  context.subscriptions.push(
+    vscode.commands.registerCommand('opened-editors.fold', foldHandler)
+  );
+
+  // prettier-ignore
+  context.subscriptions.push(
+    vscode.commands.registerCommand('opened-editors.unfold', unfoldHandler)
   );
 }
 

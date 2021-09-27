@@ -12,5 +12,9 @@
   "opened-editors.copyPathName": "Opened Editors: Copy Path Name",
   "opened-editors.copyFileNameWithExtension": "Opened Editors: Copy File Name With Extension",
   "opened-editors.copyFolderName": "Opened Editors: Copy Folder Name",
-  "opened-editors.copyFileName": "Opened Editors: Copy File Name"
+  "opened-editors.copyFileName": "Opened Editors: Copy File Name",
+  "opened-editors.foldEnableDesc": "Controls whether the fold/unfold in the editor title menu",
+  "opened-editors.fold": "Opened Editors: Fold",
+  "opened-editors.unfold": "Opened Editors: Unfold",
+  "opened-editors.foldDesc": "Opened Editors: Fold Level"
 }
