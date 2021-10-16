@@ -2,13 +2,17 @@ import * as vscode from 'vscode';
 
 function getConfiguration() {
   const configuration = vscode.workspace.getConfiguration();
-  const value = configuration.get('opened-editors.fold');
-  return value;
+  const value = configuration.get<{}>('opened-editors.fold');
+  const foldSpecialConfig = configuration.get<{}>('opened-editors.foldSpecial');
+  const foldNest = configuration.get<{}>('opened-editors.foldNest');
+  const foldSpecialValue = { ...foldSpecialConfig };
+
+  return { value, foldSpecialValue, foldNest };
 }
 
 export const foldHandler = (...args: any) => {
   let command = '';
-  const value = getConfiguration();
+  const { value } = getConfiguration();
 
   switch (value) {
     case 'Level 1':
@@ -54,7 +58,7 @@ export const foldHandler = (...args: any) => {
 
 export const unfoldHandler = (...args: any) => {
   let command = '';
-  const value = getConfiguration();
+  const { value } = getConfiguration();
 
   if (value === 'All Regions Except Selected') {
     command = 'editor.unfoldAllExcept';

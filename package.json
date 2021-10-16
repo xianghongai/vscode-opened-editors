@@ -119,6 +119,33 @@
 						"All Block Comments"
 					],
 					"markdownDescription": "%opened-editors.configuration.foldDesc%"
+				},
+				"opened-editors.foldSpecial": {
+					"type": "object",
+					"additionalProperties": {
+						"anyOf": [
+							{
+								"type": "string",
+								"enum": [
+									"Level 1",
+									"Level 2",
+									"Level 3",
+									"Level 4",
+									"Level 5",
+									"Level 6",
+									"Level 7",
+									"All",
+									"All Block Comments"
+								]
+							}
+						]
+					},
+					"markdownDescription": "%opened-editors.configuration.foldSpecialDesc%"
+				},
+				"opened-editors.foldNest": {
+					"type": "boolean",
+					"default": true,
+					"description": "%opened-editors.configuration.foldNestDesc%"
 				}
 			}
 		},

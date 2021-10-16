@@ -77,3 +77,5 @@
 ## License 📃
 
 MIT License
+
+<!-- [package.json - contributes/configuration/properties](https://github.com/microsoft/vscode/blob/main/src/vs/workbench/api/common/configurationExtensionPoint.ts) -->

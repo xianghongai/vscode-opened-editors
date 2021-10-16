@@ -20,7 +20,9 @@
   "opened-editors.command.chinesePunctuation.singleGuillemet": "Opened Editors: Wrap the selected text with 〈chinese single guillemet〉",
   "opened-editors.command.chinesePunctuation.doubleGuillemet": "Opened Editors: Wrap the selected text with 《chinese double guillemet》",
   "opened-editors.configuration.foldEnableDesc": "Controls whether the fold/unfold in the editor title menu",
-  "opened-editors.configuration.foldDesc": "Opened Editors: Fold Level",
+  "opened-editors.configuration.foldDesc": "Opened Editors: Fold Level (All languages)",
+  "opened-editors.configuration.foldSpecialDesc": "Opened Editors: Fold Level (Special language)",
+  "opened-editors.configuration.foldNestDesc": "Opened Editors: Fold nested element",
   "opened-editors.command.fold": "Opened Editors: Fold",
   "opened-editors.command.unfold": "Opened Editors: Unfold"
 }
