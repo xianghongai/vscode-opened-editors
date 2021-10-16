@@ -1,6 +1,6 @@
 {
-  "ext.displayName": "VS Code 壳扩展",
-  "ext.description": "对 VS Code 壳加了一些扩展：定位文件在侧边目录中位置、当前打开的编辑器列表、复制当前打开的文件/目录名、复制目录树、对中文标点的支持",
+  "ext.displayName": "Opened Editors",
+  "ext.description": "Opened Editors：定位文件在侧边目录中位置、当前打开的编辑器列表、复制当前打开的文件/目录名、复制目录树、展开折叠、对中文标点的支持",
   "opened-editors.configuration.revealSidebarDesc": "禁止/启用 Title 菜单图标按钮——定位当前打开文档在侧边目录中位置",
   "opened-editors.configuration.openedEditorsDesc": "禁止/启用 Title 菜单图标按钮——显示打开的编辑器",
   "opened-editors.configuration.copyFileNameDesc": "禁止/启用 Title 菜单图标按钮——复制当前打开文档的文件名",
@@ -18,5 +18,9 @@
   "opened-editors.command.chinesePunctuation.singleQuote": "Opened Editors: 用中文‘单引号’包裹选择内容",
   "opened-editors.command.chinesePunctuation.doubleQuote": "Opened Editors: 用中文“双引号”包裹选择内容",
   "opened-editors.command.chinesePunctuation.singleGuillemet": "Opened Editors: 用中文〈单书名号〉包裹选择内容",
-  "opened-editors.command.chinesePunctuation.doubleGuillemet": "Opened Editors: 用中文《双书名号》包裹选择内容"
+  "opened-editors.command.chinesePunctuation.doubleGuillemet": "Opened Editors: 用中文《双书名号》包裹选择内容",
+  "opened-editors.configuration.foldEnableDesc": "禁止/启用 Title 菜单图标按钮——折叠/展开",
+  "opened-editors.configuration.foldDesc": "Opened Editors: 折叠层级",
+  "opened-editors.command.fold": "Opened Editors: 折叠",
+  "opened-editors.command.unfold": "Opened Editors: 展开"
 }

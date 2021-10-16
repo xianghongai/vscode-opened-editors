@@ -1,5 +1,5 @@
 {
-  "ext.displayName": "VS Code Explorer Kit",
+  "ext.displayName": "Opened Editors",
   "ext.description": "quick open navigate previous in editor picker, and reveal in side bar, and copy path/folder/file name...",
   "opened-editors.configuration.revealSidebarDesc": "Controls whether opened editors reveal in the editor title menu",
   "opened-editors.configuration.openedEditorsDesc": "Controls whether show opened editors in the editor title menu",
@@ -18,5 +18,9 @@
   "opened-editors.command.chinesePunctuation.singleQuote": "Opened Editors: Wrap the selected text with ‘chinese single quote’",
   "opened-editors.command.chinesePunctuation.doubleQuote": "Opened Editors: Wrap the selected text with “chinese double quote”",
   "opened-editors.command.chinesePunctuation.singleGuillemet": "Opened Editors: Wrap the selected text with 〈chinese single guillemet〉",
-  "opened-editors.command.chinesePunctuation.doubleGuillemet": "Opened Editors: Wrap the selected text with 《chinese double guillemet》"
+  "opened-editors.command.chinesePunctuation.doubleGuillemet": "Opened Editors: Wrap the selected text with 《chinese double guillemet》",
+  "opened-editors.configuration.foldEnableDesc": "Controls whether the fold/unfold in the editor title menu",
+  "opened-editors.configuration.foldDesc": "Opened Editors: Fold Level",
+  "opened-editors.command.fold": "Opened Editors: Fold",
+  "opened-editors.command.unfold": "Opened Editors: Unfold"
 }

@@ -144,9 +144,8 @@ const handler = (dir: string, EXCLUDE = []) => {
 export const creater = (dir: string, getConfiguration: () => any) => {
   const configuration = getConfiguration();
   const FILE_TREE_EXCLUDE = configuration.get('opened-editors.fileTreeExclude');
-  const FILE_TREE_EXPORT_TYPE = configuration.get(
-    'opened-editors.fileTreeExportType'
-  );
+  // prettier-ignore
+  const FILE_TREE_EXPORT_TYPE = configuration.get('opened-editors.fileTreeExportType');
   let branches = handler(dir, FILE_TREE_EXCLUDE);
   let paddingSpace = Math.max(...branches.map((item) => item.text.length));
   let tree = branches

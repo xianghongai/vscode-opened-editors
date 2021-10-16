@@ -8,6 +8,11 @@ import {
   copyFileNameWithExtension,
 } from './modules/path';
 
+import {
+  foldHandler,
+  unfoldHandler,
+} from './modules/fold';
+
 import { fileTreeGenerator } from './modules/file-tree';
 import wrapSelectionHandler from './wrap/wrapSelection';
 
@@ -76,6 +81,16 @@ export function activate(context: ExtensionContext) {
       'opened-editors.chinesePunctuation.doubleGuillemet',
       wrapSelectionHandler('《')
     )
+  );
+
+  // prettier-ignore
+  context.subscriptions.push(
+    commands.registerCommand('opened-editors.fold', foldHandler)
+  );
+
+  // prettier-ignore
+  context.subscriptions.push(
+    commands.registerCommand('opened-editors.unfold', unfoldHandler)
   );
 }
 

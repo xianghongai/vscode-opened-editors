@@ -43,11 +43,12 @@
 		"onCommand:opened-editors.copyFileName",
 		"onCommand:opened-editors.copyFileNameWithExtension",
 		"onCommand:opened-editors.fileTreeGenerator",
-
 		"onCommand:opened-editors.chinesePunctuation.singleQuote",
 		"onCommand:opened-editors.chinesePunctuation.doubleQuote",
 		"onCommand:opened-editors.chinesePunctuation.singleGuillemet",
-		"onCommand:opened-editors.chinesePunctuation.doubleGuillemet"
+		"onCommand:opened-editors.chinesePunctuation.doubleGuillemet",
+		"onCommand:opened-editors.fold",
+		"onCommand:opened-editors.unfold"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -96,6 +97,28 @@
 						"txt"
 					],
 					"markdownDescription": "%opened-editors.configuration.fileTreeExportTypeDesc%"
+				},
+				"opened-editors.foldEnable": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": true,
+					"description": "%opened-editors.configuration.foldEnableDesc%"
+				},
+				"opened-editors.fold": {
+					"type": "string",
+					"default": "All",
+					"enum": [
+						"Level 1",
+						"Level 2",
+						"Level 3",
+						"Level 4",
+						"Level 5",
+						"Level 6",
+						"Level 7",
+						"All",
+						"All Block Comments"
+					],
+					"markdownDescription": "%opened-editors.configuration.foldDesc%"
 				}
 			}
 		},
@@ -167,6 +190,22 @@
 			{
 				"command": "opened-editors.chinesePunctuation.doubleGuillemet",
 				"title": "%opened-editors.command.chinesePunctuation.doubleGuillemet%"
+			},
+			{
+				"command": "opened-editors.fold",
+				"title": "%opened-editors.command.fold%",
+				"icon": {
+					"light": "art/collapse-gray.svg",
+					"dark": "art/collapse-white.svg"
+				}
+			},
+			{
+				"command": "opened-editors.unfold",
+				"title": "%opened-editors.command.unfold%",
+				"icon": {
+					"light": "art/expand-gray.svg",
+					"dark": "art/expand-white.svg"
+				}
 			}
 		],
 		"menus": {
@@ -197,6 +236,16 @@
 					"command": "opened-editors.copyFolderName",
 					"group": "navigation@4",
 					"when": "config.opened-editors.copyFolderName"
+				},
+				{
+					"command": "opened-editors.fold",
+					"group": "navigation@5",
+					"when": "config.opened-editors.foldEnable && editorTextFocus && foldingEnabled"
+				},
+				{
+					"command": "opened-editors.unfold",
+					"group": "navigation@6",
+					"when": "config.opened-editors.foldEnable && editorTextFocus && foldingEnabled"
 				}
 			]
 		},
