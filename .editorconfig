@@ -14,3 +14,6 @@ trim_trailing_whitespace = true # 删除换行符之前的空格字符
 [*.md]
 insert_final_newline = false
 trim_trailing_whitespace = false
+
+[*.json]
+indent_style = tab

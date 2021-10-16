@@ -1,13 +1,13 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
-import { getPath, copyPath, precondition } from '../../utils/path';
+import { env } from 'vscode';
+import { extname, basename } from 'path';
+import { getPath, copyPath as copyPathHandler, precondition } from '../../utils/path';
 
-export const copyPathName = (...args: any) => {
+export const copyPath = (...args: any) => {
   if (!precondition()) {
     return;
   }
 
-  copyPath(args, 'path');
+  copyPathHandler(args, 'path');
 };
 
 export const copyFolderName = (...args: any) => {
@@ -15,7 +15,7 @@ export const copyFolderName = (...args: any) => {
     return;
   }
 
-  copyPath(args, 'folder');
+  copyPathHandler(args, 'folder');
 };
 
 export const copyFileName = (...args: any) => {
@@ -24,9 +24,9 @@ export const copyFileName = (...args: any) => {
   }
 
   const fullPath = getPath(args);
-  const extName = path.extname(fullPath);
-  const fileName = path.basename(fullPath, extName);
-  vscode.env.clipboard.writeText(fileName);
+  const extName = extname(fullPath);
+  const fileName = basename(fullPath, extName);
+  env.clipboard.writeText(fileName);
 };
 
 export const copyFileNameWithExtension = (...args: any) => {
@@ -35,6 +35,6 @@ export const copyFileNameWithExtension = (...args: any) => {
   }
 
   const fullPath = getPath(args);
-  const fileName = path.basename(fullPath);
-  vscode.env.clipboard.writeText(fileName);
+  const fileName = basename(fullPath);
+  env.clipboard.writeText(fileName);
 };

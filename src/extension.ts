@@ -1,54 +1,86 @@
 'use strict';
-import * as vscode from 'vscode';
+import { commands, ExtensionContext } from 'vscode';
 
 import {
-  copyPathName,
+  copyPath,
   copyFolderName,
   copyFileName,
   copyFileNameWithExtension,
 } from './modules/path';
 
 import { fileTreeGenerator } from './modules/file-tree';
+import wrapSelectionHandler from './wrap/wrapSelection';
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
   // prettier-ignore
   context.subscriptions.push(
-    vscode.commands.registerCommand('opened-editors.revealSidebar', () => {
-      vscode.commands.executeCommand('workbench.files.action.showActiveFileInExplorer');
+    commands.registerCommand('opened-editors.revealSidebar', () => {
+      commands.executeCommand('workbench.files.action.showActiveFileInExplorer');
     })
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('opened-editors.openedEditors', () => {
-      vscode.commands.executeCommand('workbench.action.showAllEditors');
+    commands.registerCommand('opened-editors.openedEditors', () => {
+      commands.executeCommand('workbench.action.showAllEditors');
     })
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('opened-editors.copyPathName', copyPathName)
+    commands.registerCommand('opened-editors.copyPath', copyPath)
   );
 
   // prettier-ignore
   context.subscriptions.push(
-    vscode.commands.registerCommand('opened-editors.copyFolderName', copyFolderName)
+    commands.registerCommand('opened-editors.copyFolderName', copyFolderName)
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('opened-editors.copyFileName', copyFileName)
+    commands.registerCommand('opened-editors.copyFileName', copyFileName)
   );
 
   // prettier-ignore
   context.subscriptions.push(
-    vscode.commands.registerCommand('opened-editors.copyFileNameWithExtension', copyFileNameWithExtension)
+    commands.registerCommand('opened-editors.copyFileNameWithExtension', copyFileNameWithExtension)
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('opened-editors.fileTreeGenerator', fileTreeGenerator)
+    commands.registerCommand(
+      'opened-editors.fileTreeGenerator',
+      fileTreeGenerator
+    )
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand(
+      'opened-editors.chinesePunctuation.singleQuote',
+      wrapSelectionHandler('‘')
+    )
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand(
+      'opened-editors.chinesePunctuation.doubleQuote',
+      wrapSelectionHandler('“')
+    )
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand(
+      'opened-editors.chinesePunctuation.singleGuillemet',
+      wrapSelectionHandler('〈')
+    )
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand(
+      'opened-editors.chinesePunctuation.doubleGuillemet',
+      wrapSelectionHandler('《')
+    )
   );
 }
 
 export function deactivate() {
-  // vscode.window.setStatusBarMessage(
+  // window.setStatusBarMessage(
   //   '"Opened Editors" extension disabled',
   //   3000
   // );

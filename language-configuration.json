@@ -1,0 +1,96 @@
+// https://github.com/microsoft/vscode/blob/main/extensions/markdown-basics/language-configuration.json
+{
+	"comments": {
+		// symbols used for start and end a block comment. Remove this entry if your language does not support block comments
+		"blockComment": [ "<!--", "-->" ]
+	},
+	// symbols used as brackets
+	"brackets": [
+		["{", "}"],
+		["[", "]"],
+		["(", ")"],
+		// Chinese Punctuation
+		["（", "）"],
+		["［", "］"],
+		["｛", "｝"],
+		["＜", "＞"],
+		["｟", "｠"],
+		["《", "》"],
+		["〈", "〉"],
+		["【", "】"],
+		["〔", "〕"],
+		["〖", "〗"],
+		["〘", "〙"],
+		["〚", "〛"],
+		["〝", "〞"],
+		["「", "」"],
+		["『", "』"],
+		// French
+		["«", "»"],
+		["‹", "›"]
+	],
+	"colorizedBracketPairs": [
+	],
+	"autoClosingPairs": [
+		{ "open": "{", "close": "}" },
+		{ "open": "[", "close": "]" },
+		{ "open": "(", "close": ")" },
+		{ "open": "<", "close": ">", "notIn": [ "string" ] },
+		// Chinese Punctuation
+		{ "open": "（", "close": "）" },
+		{ "open": "［", "close": "］" },
+		{ "open": "｛", "close": "｝" },
+		{ "open": "＜", "close": "＞" },
+		{ "open": "｟", "close": "｠" },
+		{ "open": "《", "close": "》" },
+		{ "open": "〈", "close": "〉" },
+		{ "open": "【", "close": "】" },
+		{ "open": "〔", "close": "〕" },
+		{ "open": "〖", "close": "〗" },
+		{ "open": "〘", "close": "〙" },
+		{ "open": "〚", "close": "〛" },
+		{ "open": "〝", "close": "〞" },
+		{ "open": "「", "close": "」" },
+		{ "open": "『", "close": "』" },
+		// French
+		{ "open": "«", "close": "»" },
+		{ "open": "‹", "close": "›" }
+	],
+	"surroundingPairs": [
+		["(", ")"],
+		["[", "]"],
+		["`", "`"],
+		["_", "_"],
+		["*", "*"],
+		["{", "}"],
+		["'", "'"],
+		["\"", "\""],
+		// Chinese Punctuation
+		["（", "）"],
+		["［", "］"],
+		["｛", "｝"],
+		["＜", "＞"],
+		["｟", "｠"],
+		["《", "》"],
+		["〈", "〉"],
+		["【", "】"],
+		["〔", "〕"],
+		["〖", "〗"],
+		["〘", "〙"],
+		["〚", "〛"],
+		["〝", "〞"],
+		["「", "」"],
+		["『", "』"],
+		// French
+		["«", "»"],
+		["‹", "›"]
+	],
+	"folding": {
+		"offSide": true,
+		"markers": {
+			"start": "^\\s*<!--\\s*#?region\\b.*-->",
+			"end": "^\\s*<!--\\s*#?endregion\\b.*-->"
+		}
+	},
+	"wordPattern": { "pattern": "(\\p{Alphabetic}|\\p{Number}|\\p{Nonspacing_Mark})(((\\p{Alphabetic}|\\p{Number}|\\p{Nonspacing_Mark})|[_])?(\\p{Alphabetic}|\\p{Number}|\\p{Nonspacing_Mark}))*", "flags": "ug" }
+}

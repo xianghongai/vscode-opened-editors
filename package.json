@@ -1,10 +1,10 @@
 {
 	"name": "vscode-opened-editors",
 	"publisher": "NicholasHsiang",
-	"displayName": "Opened Editors",
-	"description": "quick open navigate previous in editor picker, and reveal in side bar, and copy path/folder/file name...",
+	"displayName": "%ext.displayName%",
+	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "0.0.8",
+	"version": "0.1.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -26,16 +26,28 @@
 		"filename",
 		"copy path name",
 		"copy folder name",
-		"copy file name"
+		"copy file name",
+		"Quote",
+		"Guillemet",
+		"括号",
+		"引号",
+		"书名号",
+		"中文引号",
+		"中文书名号"
 	],
 	"activationEvents": [
 		"onCommand:opened-editors.revealSidebar",
 		"onCommand:opened-editors.openedEditors",
-		"onCommand:opened-editors.copyPathName",
+		"onCommand:opened-editors.copyPath",
 		"onCommand:opened-editors.copyFolderName",
 		"onCommand:opened-editors.copyFileName",
 		"onCommand:opened-editors.copyFileNameWithExtension",
-		"onCommand:opened-editors.fileTreeGenerator"
+		"onCommand:opened-editors.fileTreeGenerator",
+
+		"onCommand:opened-editors.chinesePunctuation.singleQuote",
+		"onCommand:opened-editors.chinesePunctuation.doubleQuote",
+		"onCommand:opened-editors.chinesePunctuation.singleGuillemet",
+		"onCommand:opened-editors.chinesePunctuation.doubleGuillemet"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -46,25 +58,25 @@
 					"scope": "resource",
 					"type": "boolean",
 					"default": true,
-					"description": "%opened-editors.revealSidebarDesc%"
+					"description": "%opened-editors.configuration.revealSidebarDesc%"
 				},
 				"opened-editors.openedEditors": {
 					"scope": "resource",
 					"type": "boolean",
 					"default": true,
-					"description": "%opened-editors.openedEditorsDesc%"
+					"description": "%opened-editors.configuration.openedEditorsDesc%"
 				},
 				"opened-editors.copyFileName": {
 					"scope": "resource",
 					"type": "boolean",
 					"default": true,
-					"description": "%opened-editors.copyFileNameDesc%"
+					"description": "%opened-editors.configuration.copyFileNameDesc%"
 				},
 				"opened-editors.copyFolderName": {
 					"scope": "resource",
 					"type": "boolean",
 					"default": true,
-					"description": "%opened-editors.copyFolderNameDesc%"
+					"description": "%opened-editors.configuration.copyFolderNameDesc%"
 				},
 				"opened-editors.fileTreeExclude": {
 					"type": "array",
@@ -74,7 +86,7 @@
 					"default": [
 						".*"
 					],
-					"markdownDescription": "%opened-editors.fileTreeExcludeDesc%"
+					"markdownDescription": "%opened-editors.configuration.fileTreeExcludeDesc%"
 				},
 				"opened-editors.fileTreeExportType": {
 					"type": "string",
@@ -83,14 +95,14 @@
 						"markdown",
 						"txt"
 					],
-					"markdownDescription": "%opened-editors.fileTreeExportTypeDesc%"
+					"markdownDescription": "%opened-editors.configuration.fileTreeExportTypeDesc%"
 				}
 			}
 		},
 		"commands": [
 			{
 				"command": "opened-editors.revealSidebar",
-				"title": "%opened-editors.revealSidebar%",
+				"title": "%opened-editors.command.revealSidebar%",
 				"icon": {
 					"light": "art/reveal-gray.svg",
 					"dark": "art/reveal-white.svg"
@@ -98,15 +110,15 @@
 			},
 			{
 				"command": "opened-editors.openedEditors",
-				"title": "%opened-editors.openedEditors%",
+				"title": "%opened-editors.command.openedEditors%",
 				"icon": {
 					"light": "art/dropdown-gray.svg",
 					"dark": "art/dropdown-white.svg"
 				}
 			},
 			{
-				"command": "opened-editors.copyPathName",
-				"title": "%opened-editors.copyPathName%",
+				"command": "opened-editors.copyPath",
+				"title": "%opened-editors.command.copyPath%",
 				"icon": {
 					"light": "art/folder-gray.svg",
 					"dark": "art/folder-white.svg"
@@ -114,7 +126,7 @@
 			},
 			{
 				"command": "opened-editors.copyFolderName",
-				"title": "%opened-editors.copyFolderName%",
+				"title": "%opened-editors.command.copyFolderName%",
 				"icon": {
 					"light": "art/folder-gray.svg",
 					"dark": "art/folder-white.svg"
@@ -122,7 +134,7 @@
 			},
 			{
 				"command": "opened-editors.copyFileName",
-				"title": "%opened-editors.copyFileName%",
+				"title": "%opened-editors.command.copyFileName%",
 				"icon": {
 					"light": "art/file-gray.svg",
 					"dark": "art/file-white.svg"
@@ -130,7 +142,7 @@
 			},
 			{
 				"command": "opened-editors.copyFileNameWithExtension",
-				"title": "%opened-editors.copyFileNameWithExtension%",
+				"title": "%opened-editors.command.copyFileNameWithExtension%",
 				"icon": {
 					"light": "art/file-gray.svg",
 					"dark": "art/file-white.svg"
@@ -138,7 +150,23 @@
 			},
 			{
 				"command": "opened-editors.fileTreeGenerator",
-				"title": "%opened-editors.fileTreeGenerator%"
+				"title": "%opened-editors.command.fileTreeGenerator%"
+			},
+			{
+				"command": "opened-editors.chinesePunctuation.singleQuote",
+				"title": "%opened-editors.command.chinesePunctuation.singleQuote%"
+			},
+			{
+				"command": "opened-editors.chinesePunctuation.doubleQuote",
+				"title": "%opened-editors.command.chinesePunctuation.doubleQuote%"
+			},
+			{
+				"command": "opened-editors.chinesePunctuation.singleGuillemet",
+				"title": "%opened-editors.command.chinesePunctuation.singleGuillemet%"
+			},
+			{
+				"command": "opened-editors.chinesePunctuation.doubleGuillemet",
+				"title": "%opened-editors.command.chinesePunctuation.doubleGuillemet%"
 			}
 		],
 		"menus": {
@@ -171,7 +199,28 @@
 					"when": "config.opened-editors.copyFolderName"
 				}
 			]
-		}
+		},
+		"languages": [
+			{
+				"id": "markdown",
+				"aliases": [
+					"Markdown",
+					"markdown"
+				],
+				"extensions": [
+					".md",
+					".mkd",
+					".mdwn",
+					".mdown",
+					".markdown",
+					".markdn",
+					".mdtxt",
+					".mdtext",
+					".workbook"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		]
 	},
 	"scripts": {
 		"compile": "tsc -p ./",
