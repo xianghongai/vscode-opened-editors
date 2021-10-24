@@ -4,14 +4,14 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/xianghongai/vscode-opened-editors/"
 	},
 	"engines": {
-		"vscode": "^1.53.0"
+		"vscode": "^1.52.0"
 	},
 	"categories": [
 		"Other"
@@ -115,13 +115,18 @@
 						"Level 5",
 						"Level 6",
 						"Level 7",
-						"All",
-						"All Block Comments"
+						"All"
 					],
 					"markdownDescription": "%opened-editors.configuration.foldDesc%"
 				},
 				"opened-editors.foldSpecial": {
 					"type": "object",
+					"default": {
+						".ts, .tsx": "Level 1",
+						".js, .jsx": "Level 1",
+						".vue": "Level 4",
+						".json": "Level 2"
+					},
 					"additionalProperties": {
 						"anyOf": [
 							{
@@ -134,8 +139,7 @@
 									"Level 5",
 									"Level 6",
 									"Level 7",
-									"All",
-									"All Block Comments"
+									"All"
 								]
 							}
 						]
@@ -310,21 +314,18 @@
 		"publish": "vsce publish"
 	},
 	"devDependencies": {
-		"@types/fs-extra": "^9.0.7",
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.4",
-		"@types/node": "^12.11.7",
-		"@types/vscode": "^1.53.0",
-		"@typescript-eslint/eslint-plugin": "^4.14.1",
-		"@typescript-eslint/parser": "^4.14.1",
-		"eslint": "^7.19.0",
-		"glob": "^7.1.6",
-		"mocha": "^8.2.1",
-		"typescript": "^4.1.3",
-		"vscode-test": "^1.5.0"
+		"@types/fs-extra": "^9.0.13",
+		"@types/glob": "^7.2.0",
+		"@types/node": "^12.12.0",
+		"@types/vscode": "^1.52.0",
+		"@typescript-eslint/eslint-plugin": "^5.1.0",
+		"@typescript-eslint/parser": "^5.1.0",
+		"eslint": "^8.1.0",
+		"glob": "^7.2.0",
+		"typescript": "^4.4.4"
 	},
 	"dependencies": {
-		"fs-extra": "^9.1.0",
+		"fs-extra": "^10.0.0",
 		"ignore": "^5.1.8"
 	}
 }

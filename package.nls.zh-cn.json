@@ -21,7 +21,7 @@
   "opened-editors.command.chinesePunctuation.doubleGuillemet": "Opened Editors: 用中文《双书名号》包裹选择内容",
   "opened-editors.configuration.foldEnableDesc": "禁止/启用 Title 菜单图标按钮——折叠/展开",
   "opened-editors.configuration.foldDesc": "Opened Editors: 折叠层级 (所有语言)",
-  "opened-editors.configuration.foldSpecialDesc": "Opened Editors: 折叠层级 (指定语言)",
+  "opened-editors.configuration.foldSpecialDesc": "Opened Editors: 折叠层级 (指定语言：`.js, .jsx`)",
   "opened-editors.configuration.foldNestDesc": "Opened Editors: 同时折叠内部嵌套层级",
   "opened-editors.command.fold": "Opened Editors: 折叠",
   "opened-editors.command.unfold": "Opened Editors: 展开"

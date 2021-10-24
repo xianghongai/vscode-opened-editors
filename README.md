@@ -28,7 +28,8 @@
 - `Opened Editors: Opened Editors` - 已打开的编辑器列表
 - `Opened Editors: Copy Folder Name` - 复制目录名 (复制父层文件夹，可选择不同层级)
 - `Opened Editors: Copy File Name` - 复制文件名
-- `Opened Editors: Copy File Name With Extension` - 复制文件名 (含扩展名)
+- `Opened Editors: Fold` - 折叠 (可在配置中设定不同语言类型的折叠层级)
+- `Opened Editors: Unfold` - 展开
 
 ## 指令
 

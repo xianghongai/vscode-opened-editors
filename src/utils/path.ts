@@ -1,17 +1,17 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
+import { window, env } from 'vscode';
+import { dirname, sep } from 'path';
 
 export const getPath = function (args: any) {
   let filePath = null;
   if (args && args.length > 0) {
     filePath = args[0].fsPath;
   }
-  if (!filePath) filePath = vscode.window.activeTextEditor?.document?.fileName;
+  if (!filePath) filePath = window.activeTextEditor?.document?.fileName;
   return filePath;
 };
 
 export const precondition = () => {
-  const activeTextEditor = vscode.window.activeTextEditor;
+  const activeTextEditor = window.activeTextEditor;
 
   if (!activeTextEditor) {
     return false;
@@ -30,17 +30,17 @@ export const copyPath = (args: any, mode = 'path') => {
   let parentsPath = [];
   let lastParentPath = undefined;
 
-  // const fsPath = vscode.window.activeTextEditor?.document.uri.fsPath ?? '';
+  // const fsPath = window.activeTextEditor?.document.uri.fsPath ?? '';
   // path.dirname(fsPath)
-  let parentPath = path.dirname(getPath(args));
+  let parentPath = dirname(getPath(args));
 
   while (parentPath !== lastParentPath) {
     lastParentPath = parentPath;
     parentsPath.push(parentPath);
-    parentPath = path.dirname(parentPath);
+    parentPath = dirname(parentPath);
   }
 
-  vscode.window
+  window
     .showQuickPick(parentsPath, {
       placeHolder: mode !== 'path' ? 'copy folder name:' : 'copy path name:',
     })
@@ -49,14 +49,14 @@ export const copyPath = (args: any, mode = 'path') => {
         if (folder) {
           let _folder = folder;
           if (mode !== 'path') {
-            const split = _folder.split(path.sep);
+            const split = _folder.split(sep);
             _folder = split[split.length - 1];
           }
-          vscode.env.clipboard.writeText(_folder);
+          env.clipboard.writeText(_folder);
         }
       },
       (reason: any) => {
-        vscode.window.showErrorMessage(reason);
+        window.showErrorMessage(reason);
       }
     );
 };

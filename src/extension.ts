@@ -6,15 +6,15 @@ import {
   copyFolderName,
   copyFileName,
   copyFileNameWithExtension,
-} from './modules/path';
+} from './functions/path';
 
 import {
   foldHandler,
   unfoldHandler,
-} from './modules/fold';
+} from './functions/fold';
 
-import { fileTreeGenerator } from './modules/file-tree';
-import wrapSelectionHandler from './wrap/wrapSelection';
+import { fileTreeGenerator } from './functions/file-tree';
+import wrapSelectionHandler from './functions/wrap/wrapSelection';
 
 export function activate(context: ExtensionContext) {
   // prettier-ignore
