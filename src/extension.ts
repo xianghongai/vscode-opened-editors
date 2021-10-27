@@ -14,7 +14,6 @@ import {
 } from './functions/fold';
 
 import { fileTreeGenerator } from './functions/file-tree';
-import wrapSelectionHandler from './functions/wrap/wrapSelection';
 
 export function activate(context: ExtensionContext) {
   // prettier-ignore
@@ -52,34 +51,6 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand(
       'opened-editors.fileTreeGenerator',
       fileTreeGenerator
-    )
-  );
-
-  context.subscriptions.push(
-    commands.registerCommand(
-      'opened-editors.chinesePunctuation.singleQuote',
-      wrapSelectionHandler('‘')
-    )
-  );
-
-  context.subscriptions.push(
-    commands.registerCommand(
-      'opened-editors.chinesePunctuation.doubleQuote',
-      wrapSelectionHandler('“')
-    )
-  );
-
-  context.subscriptions.push(
-    commands.registerCommand(
-      'opened-editors.chinesePunctuation.singleGuillemet',
-      wrapSelectionHandler('〈')
-    )
-  );
-
-  context.subscriptions.push(
-    commands.registerCommand(
-      'opened-editors.chinesePunctuation.doubleGuillemet',
-      wrapSelectionHandler('《')
     )
   );
 

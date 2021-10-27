@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -205,22 +205,6 @@
 			{
 				"command": "opened-editors.fileTreeGenerator",
 				"title": "%opened-editors.command.fileTreeGenerator%"
-			},
-			{
-				"command": "opened-editors.chinesePunctuation.singleQuote",
-				"title": "%opened-editors.command.chinesePunctuation.singleQuote%"
-			},
-			{
-				"command": "opened-editors.chinesePunctuation.doubleQuote",
-				"title": "%opened-editors.command.chinesePunctuation.doubleQuote%"
-			},
-			{
-				"command": "opened-editors.chinesePunctuation.singleGuillemet",
-				"title": "%opened-editors.command.chinesePunctuation.singleGuillemet%"
-			},
-			{
-				"command": "opened-editors.chinesePunctuation.doubleGuillemet",
-				"title": "%opened-editors.command.chinesePunctuation.doubleGuillemet%"
 			},
 			{
 				"command": "opened-editors.fold",

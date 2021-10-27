@@ -35,12 +35,10 @@
 
 - `Opened Editors: Copy Path Name` - 复制文件路径 (可选择不同层级)
 - `Opened Editors: File Tree Generator` - 文件结构树 (侧边栏右键复制目录树结构)
-- `Opened Editors: Wrap the selected text with ‘chinese single quote’` - 用中文‘单引号’包裹选择内容
-- `Opened Editors: Wrap the selected text with “chinese double quote”` - 用中文“双引号”包裹选择内容
-- `Opened Editors: Wrap the selected text with 〈chinese single guillemet〉` - 用中文〈单书名号〉包裹选择内容
-- `Opened Editors: Wrap the selected text with 《chinese double guillemet》` - 用中文《双书名号》包裹选择内容
 
 ## Markdown 语言中支持的标点符号对 ([括号 - Wikipedia](https://zh.wikipedia.org/zh-cn/%E6%8B%AC%E5%8F%B7))
+
+注意，目前 `“”`/`‘’` 不支持输入包裹选择文本、不支持成对输出。
 
 ### 通用 (中日韩全角)
 
@@ -54,7 +52,6 @@
 
 - `《》`，双书名号
 - `〈〉`，单书名号，尖括号
-- `“”`/`‘’`，不支持直接输入，仅支持指令形式输入
 - `【】`，方头括号 (实心)
 - `〔〕`，六角括号 (实心)
 - `〖〗`，方头括号 (空心)
