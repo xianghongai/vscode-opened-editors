@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -263,28 +263,7 @@
 					"when": "config.opened-editors.foldEnable && editorTextFocus && foldingEnabled"
 				}
 			]
-		},
-		"languages": [
-			{
-				"id": "markdown",
-				"aliases": [
-					"Markdown",
-					"markdown"
-				],
-				"extensions": [
-					".md",
-					".mkd",
-					".mdwn",
-					".mdown",
-					".markdown",
-					".markdn",
-					".mdtxt",
-					".mdtext",
-					".workbook"
-				],
-				"configuration": "./language-configuration.json"
-			}
-		]
+		}
 	},
 	"scripts": {
 		"compile": "tsc -p ./",
