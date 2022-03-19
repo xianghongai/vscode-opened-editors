@@ -26,49 +26,18 @@
 
 - `Opened Editors: Reveal In Side Bar` - 在侧边栏中显示 (文件在侧边栏资源中的位置)
 - `Opened Editors: Opened Editors` - 已打开的编辑器列表
-- `Opened Editors: Copy Folder Name` - 复制目录名 (复制父层文件夹，可选择不同层级)
+- `Opened Editors: Copy Folder Name` - 复制目录名 (复制父层文件夹名，可选择不同层级)
 - `Opened Editors: Copy File Name` - 复制文件名
 - `Opened Editors: Fold` - 折叠 (可在配置中设定不同语言类型的折叠层级)
 - `Opened Editors: Unfold` - 展开
 
-## 指令
+## 命令
 
-- `Opened Editors: Copy Path Name` - 复制文件路径 (可选择不同层级)
+- `Opened Editors: Copy Path` - 复制文件路径 (可选择不同层级)
+
+## 资源右键菜单
+
 - `Opened Editors: File Tree Generator` - 文件结构树 (侧边栏右键复制目录树结构)
-
-## Markdown 语言中支持的标点符号对 ([括号 - Wikipedia](https://zh.wikipedia.org/zh-cn/%E6%8B%AC%E5%8F%B7))
-
-注意，目前 `“”`/`‘’` 不支持输入包裹选择文本、不支持成对输出。
-
-### 通用 (中日韩全角)
-
-- `（）`，圆括号
-- `［］`，方括号
-- `｛｝`，花括号
-- `＜＞`，尖括号
-- `｟｠`，白括号
-
-### 引用 (中日韩全角)
-
-- `《》`，双书名号
-- `〈〉`，单书名号，尖括号
-- `【】`，方头括号 (实心)
-- `〔〕`，六角括号 (实心)
-- `〖〗`，方头括号 (空心)
-- `〘〙`，六角括号 (空心)
-- `〚〛`，空心方括号
-- `〝〞`，双角秒括号
-- `「」`，引号 (台湾)
-- `『』`，引号 (台湾)
-
-### 法式
-
-- `«»`，Guillemets
-- `‹›`，Angle brackets
-
----
-
-字符包裹处理函数作者：[Konstantin](https://github.com/gko/wrap)
 
 ---
 
