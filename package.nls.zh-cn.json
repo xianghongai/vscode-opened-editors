@@ -7,6 +7,7 @@
   "opened-editors.configuration.copyFolderNameDesc": "禁止/启用 Title 菜单图标按钮——复制当前打开文档的目录名 (可选择父层)",
   "opened-editors.configuration.fileTreeExcludeDesc": "生成文件结构树时，要排除的文件和文件夹，基于 `.gitignore`，并默认排除 `.*` 目录和文件",
   "opened-editors.configuration.fileTreeExportTypeDesc": "生成文件结构树的格式，`MarkDown` (*) 或者 `TXT` 纯文本",
+  "opened-editors.configuration.fileTreeGeneratorDepthDesc": "限定创建文件树深度",
   "opened-editors.message.fileTreeHasBeenCopied": "文件树已复制到剪贴板 :)",
   "opened-editors.command.fileTreeGenerator": "文件结构树",
   "opened-editors.command.revealSidebar": "Opened Editors: 在侧边栏中显示",

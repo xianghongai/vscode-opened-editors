@@ -4,6 +4,8 @@ import ignore from 'ignore';
 
 const EXCLUDE = ['.gitignore'];
 
+let depth = 0;
+let currentDepth = 0;
 
 const getIgnore = (dir: string = '', files: Array<any> = []) => {
   let ignores: any[] = [];
@@ -60,6 +62,12 @@ const parser = (target: string, deep: Array<any> = [], rules: Array<any> = []) =
 
   let folders: any[] = [];
   let files: any[] = [];
+
+  if (currentDepth >= depth) {
+    return branches;
+  }
+
+  currentDepth += 1;
 
   children.forEach(function (item: string) {
     let folder = path.join(target, item);
@@ -132,6 +140,7 @@ const handler = (dir: string, EXCLUDE = []) => {
   }
 
   let subBranches = parser(dir, [], rules);
+  currentDepth = 0;
 
   branches = branches.concat(subBranches);
 
@@ -144,6 +153,7 @@ const handler = (dir: string, EXCLUDE = []) => {
 export const creater = (dir: string, getConfiguration: () => any) => {
   const configuration = getConfiguration();
   const FILE_TREE_EXCLUDE = configuration.get('opened-editors.fileTreeExclude');
+  depth = configuration.get('opened-editors.fileTreeGeneratorDepth');
   // prettier-ignore
   const FILE_TREE_EXPORT_TYPE = configuration.get('opened-editors.fileTreeExportType');
   let branches = handler(dir, FILE_TREE_EXCLUDE);

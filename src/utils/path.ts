@@ -1,5 +1,5 @@
-import { window, env } from 'vscode';
-import { dirname, sep } from 'path';
+import { window, env, workspace } from 'vscode';
+import { basename, dirname, sep } from 'path';
 
 export const getPath = function (args: any) {
   let filePath = null;
@@ -26,18 +26,47 @@ export const precondition = () => {
   return true;
 };
 
+function getWorkspaceFolder() {
+  let text: string | undefined;
+
+  const editor = window.activeTextEditor;
+
+  if (!editor || !workspace.workspaceFolders) {
+    return null;
+  }
+  const resource = editor.document.uri;
+  if (resource.scheme === 'file') {
+    const folder = workspace.getWorkspaceFolder(resource);
+    if (!folder) {
+      return null;
+    }
+    return basename(folder.uri.fsPath);
+  }
+
+}
+
 export const copyPath = (args: any, mode = 'path') => {
   let parentsPath = [];
-  let lastParentPath = undefined;
+  let lastParentPath: string = '';
 
-  // const fsPath = window.activeTextEditor?.document.uri.fsPath ?? '';
-  // path.dirname(fsPath)
+  const workspaceFolder = getWorkspaceFolder();
+
   let parentPath = dirname(getPath(args));
 
   while (parentPath !== lastParentPath) {
     lastParentPath = parentPath;
+    console.log('lastParentPath', lastParentPath)
     parentsPath.push(parentPath);
     parentPath = dirname(parentPath);
+  }
+
+  if (workspaceFolder) {
+    parentsPath = parentsPath.reduce((previousValue, currentValue) => {
+      if (currentValue.includes(workspaceFolder)) {
+        previousValue.push(currentValue.substring(currentValue.indexOf(workspaceFolder)));
+      }
+      return previousValue;
+    }, [] as string[])
   }
 
   window

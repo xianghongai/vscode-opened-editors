@@ -7,6 +7,7 @@
   "opened-editors.configuration.copyFolderNameDesc": "Controls whether the copy folder name in the editor title menu",
   "opened-editors.configuration.fileTreeExcludeDesc": "Configure glob patterns for excluding files and folders.",
   "opened-editors.configuration.fileTreeExportTypeDesc": "The generated format, `markdown` or `txt` plain text",
+  "opened-editors.configuration.fileTreeGeneratorDepthDesc": "Limit the depth of the generated file tree",
   "opened-editors.message.fileTreeHasBeenCopied": "The file tree has been copied to the clipboard :)",
   "opened-editors.command.fileTreeGenerator": "File Tree Generator",
   "opened-editors.command.revealSidebar": "Opened Editors: Reveal In Side Bar",

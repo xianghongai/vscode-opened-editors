@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "0.1.4",
+	"version": "1.0.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -88,6 +88,11 @@
 						".*"
 					],
 					"markdownDescription": "%opened-editors.configuration.fileTreeExcludeDesc%"
+				},
+				"opened-editors.fileTreeGeneratorDepth": {
+					"type": "number",
+					"default": 20,
+					"markdownDescription": "%opened-editors.configuration.fileTreeGeneratorDepthDesc%"
 				},
 				"opened-editors.fileTreeExportType": {
 					"type": "string",
