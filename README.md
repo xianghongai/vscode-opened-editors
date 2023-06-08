@@ -30,6 +30,7 @@
 - `Opened Editors: Copy File Name` - 复制文件名
 - `Opened Editors: Fold` - 折叠 (可在配置中设定不同语言类型的折叠层级)
 - `Opened Editors: Unfold` - 展开
+- `Opened Editors: Format Document` - 格式化文档
 
 ## 命令
 

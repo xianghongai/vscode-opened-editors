@@ -24,6 +24,8 @@
   "opened-editors.configuration.foldDesc": "Opened Editors: Fold Level (All languages)",
   "opened-editors.configuration.foldSpecialDesc": "Opened Editors: Fold Level (Special language: `.js, .jsx`)",
   "opened-editors.configuration.foldNestDesc": "Opened Editors: Fold nested element",
+  "opened-editors.configuration.formatDocumentDesc": "Controls whether show 'Format Document' in the editor title menu",
   "opened-editors.command.fold": "Opened Editors: Fold",
-  "opened-editors.command.unfold": "Opened Editors: Unfold"
+  "opened-editors.command.unfold": "Opened Editors: Unfold",
+  "opened-editors.command.formatDocument": "Opened Editors: Format Document"
 }

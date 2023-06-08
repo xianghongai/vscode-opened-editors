@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -36,6 +36,7 @@
 		"中文书名号"
 	],
 	"activationEvents": [
+		"onCommand:opened-editors.formatDocument",
 		"onCommand:opened-editors.revealSidebar",
 		"onCommand:opened-editors.openedEditors",
 		"onCommand:opened-editors.copyPath",
@@ -55,6 +56,12 @@
 		"configuration": {
 			"title": "Opened Editors",
 			"properties": {
+				"opened-editors.formatDocument": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": true,
+					"description": "%opened-editors.configuration.formatDocumentDesc%"
+				},
 				"opened-editors.revealSidebar": {
 					"scope": "resource",
 					"type": "boolean",
@@ -160,6 +167,14 @@
 		},
 		"commands": [
 			{
+				"command": "opened-editors.formatDocument",
+				"title": "%opened-editors.command.formatDocument%",
+				"icon": {
+					"light": "art/format-document-gray.svg",
+					"dark": "art/format-document-white.svg"
+				}
+			},
+			{
 				"command": "opened-editors.revealSidebar",
 				"title": "%opened-editors.command.revealSidebar%",
 				"icon": {
@@ -238,34 +253,39 @@
 			],
 			"editor/title": [
 				{
-					"command": "opened-editors.revealSidebar",
+					"command": "opened-editors.formatDocument",
 					"group": "navigation@1",
+					"when": "config.opened-editors.formatDocument && !editorReadonly && !inCompositeEditor"
+				},
+				{
+					"command": "opened-editors.revealSidebar",
+					"group": "navigation@2",
 					"when": "config.opened-editors.revealSidebar"
 				},
 				{
 					"command": "opened-editors.openedEditors",
-					"group": "navigation@2",
+					"group": "navigation@3",
 					"when": "config.opened-editors.openedEditors"
 				},
 				{
 					"command": "opened-editors.copyFileName",
-					"group": "navigation@3",
+					"group": "navigation@4",
 					"when": "config.opened-editors.copyFileName"
 				},
 				{
 					"command": "opened-editors.copyFolderName",
-					"group": "navigation@4",
+					"group": "navigation@5",
 					"when": "config.opened-editors.copyFolderName"
 				},
 				{
 					"command": "opened-editors.fold",
-					"group": "navigation@5",
-					"when": "config.opened-editors.foldEnable && editorTextFocus && foldingEnabled"
+					"group": "navigation@6",
+					"when": "config.opened-editors.foldEnable && foldingEnabled"
 				},
 				{
 					"command": "opened-editors.unfold",
-					"group": "navigation@6",
-					"when": "config.opened-editors.foldEnable && editorTextFocus && foldingEnabled"
+					"group": "navigation@7",
+					"when": "config.opened-editors.foldEnable && foldingEnabled"
 				}
 			]
 		}

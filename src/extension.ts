@@ -16,6 +16,12 @@ import {
 import { fileTreeGenerator } from './functions/file-tree';
 
 export function activate(context: ExtensionContext) {
+  context.subscriptions.push(
+    commands.registerCommand('opened-editors.formatDocument', () => {
+      commands.executeCommand('editor.action.formatDocument');
+    })
+  );
+
   // prettier-ignore
   context.subscriptions.push(
     commands.registerCommand('opened-editors.revealSidebar', () => {
