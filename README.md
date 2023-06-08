@@ -4,19 +4,19 @@
 
 <p align="center">
   <a href="https://github.com/xianghongai/vscode-opened-editors">
-    <img src="https://img.shields.io/github/repo-size/xianghongai/vscode-opened-editors?style=plastic&color=4ac51c">
+    <img src="https://img.shields.io/github/repo-size/xianghongai/vscode-opened-editors?color=4ac51c&style=plastic&?cacheSeconds=3600">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nicholashsiang.vscode-opened-editors">
-    <img src="https://vsmarketplacebadge.apphb.com/version-short/nicholashsiang.vscode-opened-editors.svg?style=plastic&color=408cff">
+    <img src="https://img.shields.io/visual-studio-marketplace/v/nicholashsiang.vscode-opened-editors?color=%234ac51c&style=plastic&?cacheSeconds=3600">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nicholashsiang.vscode-opened-editors">
-    <img src="https://vsmarketplacebadge.apphb.com/installs-short/nicholashsiang.vscode-opened-editors.svg?style=plastic&color=4ac51c">
+    <img src="https://img.shields.io/visual-studio-marketplace/d/nicholashsiang.vscode-opened-editors?color=4ac51c&style=plastic&?cacheSeconds=3600">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nicholashsiang.vscode-opened-editors">
-    <img src="https://vsmarketplacebadge.apphb.com/rating-short/nicholashsiang.vscode-opened-editors.svg?style=plastic&color=4ac51c">
+    <img src="https://img.shields.io/visual-studio-marketplace/r/nicholashsiang.vscode-opened-editors?color=4ac51c&style=plastic&?cacheSeconds=3600">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nicholashsiang.vscode-opened-editors">
-    <img src="https://img.shields.io/github/license/xianghongai/vscode-opened-editors?maxAge=2592000&style=plastic&color=4ac51c">
+    <img src="https://img.shields.io/github/license/xianghongai/vscode-opened-editors?color=4ac51c&style=plastic&?cacheSeconds=3600">
   </a>
 </p>
 
