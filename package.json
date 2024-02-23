@@ -4,14 +4,14 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "1.0.5",
+	"version": "2.0.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/xianghongai/vscode-opened-editors/"
 	},
 	"engines": {
-		"vscode": "^1.52.0"
+		"vscode": "^1.75.0"
 	},
 	"categories": [
 		"Other"
@@ -26,30 +26,7 @@
 		"filename",
 		"copy path name",
 		"copy folder name",
-		"copy file name",
-		"Quote",
-		"Guillemet",
-		"括号",
-		"引号",
-		"书名号",
-		"中文引号",
-		"中文书名号"
-	],
-	"activationEvents": [
-		"onCommand:opened-editors.formatDocument",
-		"onCommand:opened-editors.revealSidebar",
-		"onCommand:opened-editors.openedEditors",
-		"onCommand:opened-editors.copyPath",
-		"onCommand:opened-editors.copyFolderName",
-		"onCommand:opened-editors.copyFileName",
-		"onCommand:opened-editors.copyFileNameWithExtension",
-		"onCommand:opened-editors.fileTreeGenerator",
-		"onCommand:opened-editors.chinesePunctuation.singleQuote",
-		"onCommand:opened-editors.chinesePunctuation.doubleQuote",
-		"onCommand:opened-editors.chinesePunctuation.singleGuillemet",
-		"onCommand:opened-editors.chinesePunctuation.doubleGuillemet",
-		"onCommand:opened-editors.fold",
-		"onCommand:opened-editors.unfold"
+		"copy file name"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -241,6 +218,50 @@
 					"light": "art/expand-gray.svg",
 					"dark": "art/expand-white.svg"
 				}
+			},
+			{
+				"command": "copy-case.commands",
+				"title": "%copy-case.command.commands%"
+			},
+			{
+				"command": "copy-case.constant",
+				"title": "%copy-case.command.constant%"
+			},
+			{
+				"command": "copy-case.camel",
+				"title": "%copy-case.command.camel%"
+			},
+			{
+				"command": "copy-case.pascal",
+				"title": "%copy-case.command.pascal%"
+			},
+			{
+				"command": "copy-case.kebab",
+				"title": "%copy-case.command.kebab%"
+			},
+			{
+				"command": "copy-case.snake",
+				"title": "%copy-case.command.snake%"
+			},
+			{
+				"command": "copy-case.dot",
+				"title": "%copy-case.command.dot%"
+			},
+			{
+				"command": "copy-case.path",
+				"title": "%copy-case.command.path%"
+			},
+			{
+				"command": "copy-case.title",
+				"title": "%copy-case.command.title%"
+			},
+			{
+				"command": "copy-case.lower",
+				"title": "%copy-case.command.lower%"
+			},
+			{
+				"command": "copy-case.upper",
+				"title": "%copy-case.command.upper%"
 			}
 		],
 		"menus": {
@@ -303,17 +324,19 @@
 	},
 	"devDependencies": {
 		"@types/fs-extra": "^9.0.13",
-		"@types/glob": "^7.2.0",
-		"@types/node": "^12.12.0",
-		"@types/vscode": "^1.52.0",
-		"@typescript-eslint/eslint-plugin": "^5.1.0",
-		"@typescript-eslint/parser": "^5.1.0",
-		"eslint": "^8.1.0",
-		"glob": "^7.2.0",
-		"typescript": "^4.4.4"
+		"@types/node": "^16.18.34",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^6.7.0",
+		"@typescript-eslint/parser": "^6.7.0",
+		"eslint": "^8.26.0",
+		"typescript": "^5.3.2"
 	},
 	"dependencies": {
+		"change-case": "4.1.2",
 		"fs-extra": "^10.0.0",
 		"ignore": "^5.1.8"
+	},
+	"peerDependencies": {
+		"@vscode/vsce": "^2.24.0"
 	}
 }

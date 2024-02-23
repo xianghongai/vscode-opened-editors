@@ -35,6 +35,17 @@
 ## 命令
 
 - `Opened Editors: Copy Path` - 复制文件路径 (可选择不同层级)
+- `Copy Case: Commands` - 命名风格复制...
+- `Copy Case: constant` - 以 `constant` 命名风格复制
+- `Copy Case: camel` - 以 `camel` 命名风格复制
+- `Copy Case: pascal` - 以 `pascal` 命名风格复制
+- `Copy Case: kebab` - 以 `kebab` 命名风格复制
+- `Copy Case: snake` - 以 `snake` 命名风格复制
+- `Copy Case: dot` - 以 `dot` 命名风格复制
+- `Copy Case: path` - 以 `path` 命名风格复制
+- `Copy Case: title` - 以 `title` 命名风格复制
+- `Copy Case: lower` - 以 `lower` 命名风格复制
+- `Copy Case: upper` - 以 `upper` 命名风格复制
 
 ## 资源右键菜单
 

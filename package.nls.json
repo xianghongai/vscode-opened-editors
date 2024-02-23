@@ -16,10 +16,6 @@
   "opened-editors.command.copyFileNameWithExtension": "Opened Editors: Copy File Name With Extension",
   "opened-editors.command.copyFolderName": "Opened Editors: Copy Folder Name",
   "opened-editors.command.copyFileName": "Opened Editors: Copy File Name",
-  "opened-editors.command.chinesePunctuation.singleQuote": "Opened Editors: Wrap the selected text with ‘chinese single quote’",
-  "opened-editors.command.chinesePunctuation.doubleQuote": "Opened Editors: Wrap the selected text with “chinese double quote”",
-  "opened-editors.command.chinesePunctuation.singleGuillemet": "Opened Editors: Wrap the selected text with 〈chinese single guillemet〉",
-  "opened-editors.command.chinesePunctuation.doubleGuillemet": "Opened Editors: Wrap the selected text with 《chinese double guillemet》",
   "opened-editors.configuration.foldEnableDesc": "Controls whether the fold/unfold in the editor title menu",
   "opened-editors.configuration.foldDesc": "Opened Editors: Fold Level (All languages)",
   "opened-editors.configuration.foldSpecialDesc": "Opened Editors: Fold Level (Special language: `.js, .jsx`)",
@@ -27,5 +23,17 @@
   "opened-editors.configuration.formatDocumentDesc": "Controls whether show 'Format Document' in the editor title menu",
   "opened-editors.command.fold": "Opened Editors: Fold",
   "opened-editors.command.unfold": "Opened Editors: Unfold",
-  "opened-editors.command.formatDocument": "Opened Editors: Format Document"
+  "opened-editors.command.formatDocument": "Opened Editors: Format Document",
+  "copy-case.command.commands": "Copy Case: Commands",
+	"copy-case.command.constant": "Copy Case: constant",
+	"copy-case.command.camel": "Copy Case: camel",
+	"copy-case.command.pascal": "Copy Case: pascal",
+	"copy-case.command.kebab": "Copy Case: kebab",
+	"copy-case.command.snake": "Copy Case: snake",
+	"copy-case.command.dot": "Copy Case: dot",
+	"copy-case.command.path": "Copy Case: path",
+	"copy-case.command.title": "Copy Case: title",
+	"copy-case.command.lower": "Copy Case: lower",
+	"copy-case.command.upper": "Copy Case: upper"
+
 }
