@@ -1,5 +1,5 @@
 
-import { window, env, QuickPickItem } from "vscode";
+import { window, env, QuickPickItem, TextEditor } from "vscode";
 // change-case 5.x Not Support CommonJS
 import {
   constantCase,
@@ -11,7 +11,15 @@ import {
   pathCase,
   capitalCase,
   noCase,
+  Options,
 } from 'change-case';
+
+export const ACTION_TYPE = {
+  copy: 'copy',
+  paste: 'paste',
+} as const;
+
+type ACTION_TYPE_VALUES = typeof ACTION_TYPE[keyof typeof ACTION_TYPE];
 
 export const ACTIONS = {
   commands: 'commands',
@@ -27,7 +35,13 @@ export const ACTIONS = {
   upper: 'upper',
 };
 
-const QUICK_ACTIONS = [
+type QuickAction = {
+  label: string;
+  description: string;
+  handler: (input: string, options?: Options) => string;
+};
+
+const QUICK_ACTIONS: QuickAction[] = [
   {
     label: ACTIONS.constant,
     description: 'Convert a string to constant case (`FOO_BAR`).',
@@ -40,8 +54,7 @@ const QUICK_ACTIONS = [
   },
   {
     label: ACTIONS.pascal,
-    description:
-      'Convert a string to pascal case (`FooBar`).',
+    description: 'Convert a string to pascal case (`FooBar`).',
     handler: pascalCase,
   },
   {
@@ -82,14 +95,27 @@ const QUICK_ACTIONS = [
   },
 ];
 
-export function quickCopyCase() {
+
+export async function quickCaseAction(actionType: ACTION_TYPE_VALUES) {
   const editor = window.activeTextEditor;
 
   if (!editor) {
     return;
   }
 
-  const text = editor.document.getText(editor.selection)
+  let text: string | undefined;
+  let actionName: string;
+
+  switch (actionType) {
+    case ACTION_TYPE.copy:
+      actionName = 'Copy Case';
+      text = editor.document.getText(editor.selection);
+      break;
+    case ACTION_TYPE.paste:
+      actionName = 'Paste Case';
+      text = await env.clipboard.readText();
+      break;
+  }
 
   if (!text) {
     return;
@@ -98,16 +124,35 @@ export function quickCopyCase() {
   const items: QuickPickItem[] = QUICK_ACTIONS.map((item) => ({
     label: item.label,
     description: text
-      ? `Copy Case: ${item.handler(text)}`
+      ? `${actionName}: ${item.handler(text)}`
       : item.description,
   }));
 
   window
     .showQuickPick(items)
-    .then((command) => copyCase(command?.label));
+    .then((command: any) => caseAction(command?.label, actionType));
 }
 
-export function copyCase(label: string | undefined) {
+function copyCase(action: QuickAction, editor: TextEditor) {
+  let text = editor.document.getText(editor.selection);
+  env.clipboard.writeText((action.handler(text)));
+}
+
+function pasteCase(action: QuickAction, editor: TextEditor) {
+  env.clipboard.readText().then((text) => {
+    editor.edit((editBuilder) => {
+      editor.selections.forEach(selection => {
+        if (selection.isEmpty) {
+          editBuilder.insert(editor.selection.active, action.handler(text));
+        } else {
+          editBuilder.replace(selection, action.handler(text));
+        }
+      });
+    });
+  });
+}
+
+export function caseAction(label: string | undefined, actionType: ACTION_TYPE_VALUES) {
   const action = QUICK_ACTIONS.filter(
     (item) => item.label === label
   )[0];
@@ -120,7 +165,12 @@ export function copyCase(label: string | undefined) {
     return; // no editor
   }
 
-  let text = editor.document.getText(editor.selection);
-
-  env.clipboard.writeText((action.handler(text)));
+  switch (actionType) {
+    case ACTION_TYPE.copy:
+      copyCase(action, editor);
+      break;
+    case ACTION_TYPE.paste:
+      pasteCase(action, editor);
+      break;
+  }
 }

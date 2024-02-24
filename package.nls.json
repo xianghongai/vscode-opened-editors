@@ -34,6 +34,16 @@
 	"copy-case.command.path": "Copy Case: path",
 	"copy-case.command.title": "Copy Case: title",
 	"copy-case.command.lower": "Copy Case: lower",
-	"copy-case.command.upper": "Copy Case: upper"
-
+	"copy-case.command.upper": "Copy Case: upper",
+  "paste-case.command.commands": "Paste Case: Commands",
+	"paste-case.command.constant": "Paste Case: constant",
+	"paste-case.command.camel": "Paste Case: camel",
+	"paste-case.command.pascal": "Paste Case: pascal",
+	"paste-case.command.kebab": "Paste Case: kebab",
+	"paste-case.command.snake": "Paste Case: snake",
+	"paste-case.command.dot": "Paste Case: dot",
+	"paste-case.command.path": "Paste Case: path",
+	"paste-case.command.title": "Paste Case: title",
+	"paste-case.command.lower": "Paste Case: lower",
+	"paste-case.command.upper": "Paste Case: upper"
 }

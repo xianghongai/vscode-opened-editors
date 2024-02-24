@@ -13,9 +13,10 @@ import { foldHandler, unfoldHandler } from './functions/fold';
 import { fileTreeGenerator } from './functions/file-tree';
 
 import {
-  quickCopyCase,
-  copyCase,
+  quickCaseAction,
+  caseAction,
   ACTIONS,
+  ACTION_TYPE,
 } from './functions/copy-case';
 
 export function activate(context: ExtensionContext) {
@@ -75,56 +76,111 @@ export function activate(context: ExtensionContext) {
 
   // Copy Case
   context.subscriptions.push(
-    commands.registerCommand('copy-case.commands', quickCopyCase)
+    commands.registerCommand('copy-case.commands', () => quickCaseAction(ACTION_TYPE.copy))
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.constant', () => {
-      copyCase(ACTIONS.constant);
+      caseAction(ACTIONS.constant, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.camel', () => {
-      copyCase(ACTIONS.camel);
+      caseAction(ACTIONS.camel, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.pascal', () => {
-      copyCase(ACTIONS.pascal);
+      caseAction(ACTIONS.pascal, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.kebab', () => {
-      copyCase(ACTIONS.kebab);
+      caseAction(ACTIONS.kebab, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.snake', () => {
-      copyCase(ACTIONS.snake);
+      caseAction(ACTIONS.snake, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.dot', () => {
-      copyCase(ACTIONS.dot);
+      caseAction(ACTIONS.dot, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.path', () => {
-      copyCase(ACTIONS.path);
+      caseAction(ACTIONS.path, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.title', () => {
-      copyCase(ACTIONS.title);
+      caseAction(ACTIONS.title, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.lower', () => {
-      copyCase(ACTIONS.lower);
+      caseAction(ACTIONS.lower, ACTION_TYPE.copy);
     })
   );
   context.subscriptions.push(
     commands.registerCommand('copy-case.upper', () => {
-      copyCase(ACTIONS.upper);
+      caseAction(ACTIONS.upper, ACTION_TYPE.copy);
+    })
+  );
+
+  // Paste Case
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.commands', () => quickCaseAction(ACTION_TYPE.paste))
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.constant', () => {
+      caseAction(ACTIONS.constant, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.camel', () => {
+      caseAction(ACTIONS.camel, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.pascal', () => {
+      caseAction(ACTIONS.pascal, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.kebab', () => {
+      caseAction(ACTIONS.kebab, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.snake', () => {
+      caseAction(ACTIONS.snake, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.dot', () => {
+      caseAction(ACTIONS.dot, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.path', () => {
+      caseAction(ACTIONS.path, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.title', () => {
+      caseAction(ACTIONS.title, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.lower', () => {
+      caseAction(ACTIONS.lower, ACTION_TYPE.paste);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('paste-case.upper', () => {
+      caseAction(ACTIONS.upper, ACTION_TYPE.paste);
     })
   );
 }

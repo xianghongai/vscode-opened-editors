@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -26,7 +26,10 @@
 		"filename",
 		"copy path name",
 		"copy folder name",
-		"copy file name"
+		"copy file name",
+		"case",
+		"copy case",
+		"paste case"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -262,6 +265,50 @@
 			{
 				"command": "copy-case.upper",
 				"title": "%copy-case.command.upper%"
+			},
+			{
+				"command": "paste-case.commands",
+				"title": "%paste-case.command.commands%"
+			},
+			{
+				"command": "paste-case.constant",
+				"title": "%paste-case.command.constant%"
+			},
+			{
+				"command": "paste-case.camel",
+				"title": "%paste-case.command.camel%"
+			},
+			{
+				"command": "paste-case.pascal",
+				"title": "%paste-case.command.pascal%"
+			},
+			{
+				"command": "paste-case.kebab",
+				"title": "%paste-case.command.kebab%"
+			},
+			{
+				"command": "paste-case.snake",
+				"title": "%paste-case.command.snake%"
+			},
+			{
+				"command": "paste-case.dot",
+				"title": "%paste-case.command.dot%"
+			},
+			{
+				"command": "paste-case.path",
+				"title": "%paste-case.command.path%"
+			},
+			{
+				"command": "paste-case.title",
+				"title": "%paste-case.command.title%"
+			},
+			{
+				"command": "paste-case.lower",
+				"title": "%paste-case.command.lower%"
+			},
+			{
+				"command": "paste-case.upper",
+				"title": "%paste-case.command.upper%"
 			}
 		],
 		"menus": {
