@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "2.2.0",
+	"version": "2.3.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -142,6 +142,16 @@
 					"type": "boolean",
 					"default": true,
 					"description": "%opened-editors.configuration.foldNestDesc%"
+				},
+				"opened-editors.togglePanel": {
+					"type": "boolean",
+					"default": true,
+					"description": "%opened-editors.configuration.togglePanel%"
+				},
+				"opened-editors.openWelcome": {
+					"type": "boolean",
+					"default": false,
+					"description": "%opened-editors.configuration.openWelcome%"
 				}
 			}
 		},

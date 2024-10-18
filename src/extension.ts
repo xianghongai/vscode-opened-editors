@@ -1,23 +1,10 @@
 'use strict';
-import { commands, ExtensionContext, window, StatusBarAlignment } from 'vscode';
-
-import {
-  copyPath,
-  copyFolderName,
-  copyFileName,
-  copyFileNameWithExtension,
-} from './functions/path';
-
+import { commands, ExtensionContext } from 'vscode';
+import { copyPath, copyFolderName, copyFileName, copyFileNameWithExtension } from './functions/path';
 import { foldHandler, unfoldHandler } from './functions/fold';
-
 import { fileTreeGenerator } from './functions/file-tree';
-
-import {
-  quickCaseAction,
-  caseAction,
-  ACTIONS,
-  ACTION_TYPE,
-} from './functions/copy-case';
+import { quickCaseAction, caseAction, ACTIONS, ACTION_TYPE } from './functions/copy-case';
+import { openWelcome, togglePanel } from './functions/status-bar';
 
 export function activate({ subscriptions }: ExtensionContext) {
   subscriptions.push(
@@ -184,13 +171,8 @@ export function activate({ subscriptions }: ExtensionContext) {
     })
   );
 
-  // Status Bar add 'Toggle Panel'
-  const statusBarItem = window.createStatusBarItem(StatusBarAlignment.Right);
-  statusBarItem.text = '$(terminal-powershell)';
-  statusBarItem.tooltip = 'Toggle Panel';
-  statusBarItem.command = 'workbench.action.togglePanel';
-  statusBarItem.show();
-  subscriptions.push(statusBarItem);
+  togglePanel(subscriptions);
+  openWelcome(subscriptions);
 }
 
 export function deactivate() {

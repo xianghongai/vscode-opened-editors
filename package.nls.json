@@ -21,6 +21,8 @@
   "opened-editors.configuration.foldSpecialDesc": "Opened Editors: Fold Level (Special language: `.js, .jsx`)",
   "opened-editors.configuration.foldNestDesc": "Opened Editors: Fold nested element",
   "opened-editors.configuration.formatDocumentDesc": "Controls whether show 'Format Document' in the editor title menu",
+	"opened-editors.configuration.togglePanel": "Show the Toggle Panel button in the status bar",
+	"opened-editors.configuration.openWelcome": "Show the Welcome button in the status bar",
   "opened-editors.command.fold": "Opened Editors: Fold",
   "opened-editors.command.unfold": "Opened Editors: Unfold",
   "opened-editors.command.formatDocument": "Opened Editors: Format Document",
