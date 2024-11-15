@@ -55,7 +55,6 @@ export const copyPath = (args: any, mode = 'path') => {
 
   while (parentPath !== lastParentPath) {
     lastParentPath = parentPath;
-    console.log('lastParentPath', lastParentPath)
     parentsPath.push(parentPath);
     parentPath = dirname(parentPath);
   }

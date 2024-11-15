@@ -38,34 +38,6 @@
 
 - `Opened Editors: Copy Path` - 复制文件路径 (可选择不同层级)
 
-### 复制命名风格
-
-- `Copy Case: Commands` - 命名风格复制...
-- `Copy Case: constant` - 以 `constant` 命名风格复制 (`FOO_BAR`)
-- `Copy Case: camel` - 以 `camel` 命名风格复制 (`fooBar`)
-- `Copy Case: pascal` - 以 `pascal` 命名风格复制 (`FooBar`)
-- `Copy Case: kebab` - 以 `kebab` 命名风格复制 (`foo-bar`)
-- `Copy Case: snake` - 以 `snake` 命名风格复制 (`foo_bar`)
-- `Copy Case: dot` - 以 `dot` 命名风格复制 (`foo.bar`)
-- `Copy Case: path` - 以 `path` 命名风格复制 (`foo/bar`)
-- `Copy Case: title` - 以 `title` 命名风格复制 (`Foo Bar`)
-- `Copy Case: lower` - 以 `lower` 命名风格复制 (`foo bar`)
-- `Copy Case: upper` - 以 `upper` 命名风格复制 (`FOO BAR`)
-
-### 粘贴命名风格
-
-- `Paste Case: Commands` - 命名风格粘贴...
-- `Paste Case: constant` - 以 `constant` 命名风格粘贴 (`FOO_BAR`)
-- `Paste Case: camel` - 以 `camel` 命名风格粘贴 (`fooBar`)
-- `Paste Case: pascal` - 以 `pascal` 命名风格粘贴 (`FooBar`)
-- `Paste Case: kebab` - 以 `kebab` 命名风格粘贴 (`foo-bar`)
-- `Paste Case: snake` - 以 `snake` 命名风格粘贴 (`foo_bar`)
-- `Paste Case: dot` - 以 `dot` 命名风格粘贴 (`foo.bar`)
-- `Paste Case: path` - 以 `path` 命名风格粘贴 (`foo/bar`)
-- `Paste Case: title` - 以 `title` 命名风格粘贴 (`Foo Bar`)
-- `Paste Case: lower` - 以 `lower` 命名风格粘贴 (`foo bar`)
-- `Paste Case: upper` - 以 `upper` 命名风格粘贴 (`FOO BAR`)
-
 ## 资源右键菜单
 
 - `Opened Editors: File Tree Generator` - 文件结构树 (侧边栏右键复制目录树结构)

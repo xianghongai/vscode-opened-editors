@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -26,10 +26,7 @@
 		"filename",
 		"copy path name",
 		"copy folder name",
-		"copy file name",
-		"case",
-		"copy case",
-		"paste case"
+		"copy file name"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -231,94 +228,6 @@
 					"light": "art/expand-gray.svg",
 					"dark": "art/expand-white.svg"
 				}
-			},
-			{
-				"command": "copy-case.commands",
-				"title": "%copy-case.command.commands%"
-			},
-			{
-				"command": "copy-case.constant",
-				"title": "%copy-case.command.constant%"
-			},
-			{
-				"command": "copy-case.camel",
-				"title": "%copy-case.command.camel%"
-			},
-			{
-				"command": "copy-case.pascal",
-				"title": "%copy-case.command.pascal%"
-			},
-			{
-				"command": "copy-case.kebab",
-				"title": "%copy-case.command.kebab%"
-			},
-			{
-				"command": "copy-case.snake",
-				"title": "%copy-case.command.snake%"
-			},
-			{
-				"command": "copy-case.dot",
-				"title": "%copy-case.command.dot%"
-			},
-			{
-				"command": "copy-case.path",
-				"title": "%copy-case.command.path%"
-			},
-			{
-				"command": "copy-case.title",
-				"title": "%copy-case.command.title%"
-			},
-			{
-				"command": "copy-case.lower",
-				"title": "%copy-case.command.lower%"
-			},
-			{
-				"command": "copy-case.upper",
-				"title": "%copy-case.command.upper%"
-			},
-			{
-				"command": "paste-case.commands",
-				"title": "%paste-case.command.commands%"
-			},
-			{
-				"command": "paste-case.constant",
-				"title": "%paste-case.command.constant%"
-			},
-			{
-				"command": "paste-case.camel",
-				"title": "%paste-case.command.camel%"
-			},
-			{
-				"command": "paste-case.pascal",
-				"title": "%paste-case.command.pascal%"
-			},
-			{
-				"command": "paste-case.kebab",
-				"title": "%paste-case.command.kebab%"
-			},
-			{
-				"command": "paste-case.snake",
-				"title": "%paste-case.command.snake%"
-			},
-			{
-				"command": "paste-case.dot",
-				"title": "%paste-case.command.dot%"
-			},
-			{
-				"command": "paste-case.path",
-				"title": "%paste-case.command.path%"
-			},
-			{
-				"command": "paste-case.title",
-				"title": "%paste-case.command.title%"
-			},
-			{
-				"command": "paste-case.lower",
-				"title": "%paste-case.command.lower%"
-			},
-			{
-				"command": "paste-case.upper",
-				"title": "%paste-case.command.upper%"
 			}
 		],
 		"menus": {
@@ -390,7 +299,6 @@
 		"typescript": "^5.6.2"
 	},
 	"dependencies": {
-		"change-case": "4.1.2",
 		"fs-extra": "^10.0.0",
 		"ignore": "^5.2.0"
 	},
