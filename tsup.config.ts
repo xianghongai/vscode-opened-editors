@@ -6,6 +6,8 @@ export default defineConfig((options) => ({
   platform: 'node',
   sourcemap: true,
   external: ['vscode'],
+  // 明确指定需要打包的依赖
+  noExternal: ['ignore', 'tree-dump', 'fs-extra'],
   outDir: 'dist',
   clean: !options.watch,
   minify: options.minify ?? false,
