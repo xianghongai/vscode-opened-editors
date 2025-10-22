@@ -21,9 +21,13 @@
   "opened-editors.configuration.foldSpecialDesc": "Opened Editors: Fold Level (Special language: `.js, .jsx`)",
   "opened-editors.configuration.foldNestDesc": "Opened Editors: Fold nested element",
   "opened-editors.configuration.formatDocumentDesc": "Controls whether show 'Format Document' in the editor title menu",
-	"opened-editors.configuration.togglePanel": "Show the Toggle Panel button in the status bar",
-	"opened-editors.configuration.openWelcome": "Show the Welcome button in the status bar",
+  "opened-editors.configuration.togglePanel": "Show the Toggle Panel button in the status bar",
+  "opened-editors.configuration.openWelcome": "Show the Welcome button in the status bar",
+  "opened-editors.configuration.copyAbsolutePath": "Controls whether show the Copy Absolute Path button in the editor title menu",
+  "opened-editors.configuration.copyRelativePath": "Controls whether show the Copy Relative Path button in the editor title menu",
   "opened-editors.command.fold": "Opened Editors: Fold",
   "opened-editors.command.unfold": "Opened Editors: Unfold",
-  "opened-editors.command.formatDocument": "Opened Editors: Format Document"
+  "opened-editors.command.formatDocument": "Opened Editors: Format Document",
+  "opened-editors.command.copyAbsolutePath": "Opened Editors: Copy Absolute Path",
+  "opened-editors.command.copyRelativePath": "Opened Editors: Copy Relative Path"
 }

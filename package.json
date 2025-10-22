@@ -4,7 +4,7 @@
 	"displayName": "%ext.displayName%",
 	"description": "%ext.description%",
 	"icon": "art/icon.png",
-	"version": "2.4.0",
+	"version": "2.5.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -28,7 +28,7 @@
 		"copy folder name",
 		"copy file name"
 	],
-	"main": "./out/extension.js",
+	"main": "./dist/extension.js",
 	"contributes": {
 		"configuration": {
 			"title": "Opened Editors",
@@ -149,6 +149,16 @@
 					"type": "boolean",
 					"default": false,
 					"description": "%opened-editors.configuration.openWelcome%"
+				},
+				"opened-editors.copyAbsolutePath": {
+					"type": "boolean",
+					"default": true,
+					"description": "%opened-editors.configuration.copyAbsolutePath%"
+				},
+				"opened-editors.copyRelativePath": {
+					"type": "boolean",
+					"default": true,
+					"description": "%opened-editors.configuration.copyRelativePath%"
 				}
 			}
 		},
@@ -228,6 +238,22 @@
 					"light": "art/expand-gray.svg",
 					"dark": "art/expand-white.svg"
 				}
+			},
+			{
+				"command": "opened-editors.copyRelativePath",
+				"title": "%opened-editors.command.copyRelativePath%",
+				"icon": {
+					"light": "art/relative-path-gray.svg",
+					"dark": "art/relative-path-white.svg"
+				}
+			},
+			{
+				"command": "opened-editors.copyAbsolutePath",
+				"title": "%opened-editors.command.copyAbsolutePath%",
+				"icon": {
+					"light": "art/absolute-path-gray.svg",
+					"dark": "art/absolute-path-white.svg"
+				}
 			}
 		],
 		"menus": {
@@ -265,45 +291,60 @@
 					"when": "config.opened-editors.copyFolderName"
 				},
 				{
-					"command": "opened-editors.fold",
+					"command": "opened-editors.copyRelativePath",
 					"group": "navigation@6",
+					"when": "config.opened-editors.copyRelativePath"
+				},
+				{
+					"command": "opened-editors.copyAbsolutePath",
+					"group": "navigation@7",
+					"when": "config.opened-editors.copyAbsolutePath"
+				},
+				{
+					"command": "opened-editors.fold",
+					"group": "navigation@8",
 					"when": "config.opened-editors.foldEnable && foldingEnabled"
 				},
 				{
 					"command": "opened-editors.unfold",
-					"group": "navigation@7",
+					"group": "navigation@9",
 					"when": "config.opened-editors.foldEnable && foldingEnabled"
 				}
 			]
 		}
 	},
 	"scripts": {
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
+		"build": "tsup --config tsup.config.ts --minify",
+		"compile": "tsup --config tsup.config.ts",
+		"compile-tests": "tsc -p . --outDir out",
+		"lint": "eslint src",
+		"package": "vsce package --no-dependencies",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"publish": "vsce publish --no-dependencies",
 		"test": "node ./out/test/runTest.js",
-		"prebuild": "npm run compile",
-		"build": "vsce package",
-		"prepublish": "npm run build",
-		"publish": "vsce publish"
+		"vscode:prepublish": "npm run build",
+		"watch": "tsup --config tsup.config.ts --watch",
+		"watch-tests": "tsc -p . -w --outDir out"
 	},
 	"devDependencies": {
-		"@types/fs-extra": "^9.0.13",
+		"@types/fs-extra": "^11.0.4",
+		"@types/mocha": "^10.0.1",
 		"@types/node": "^20",
-		"@types/vscode": "^1.73.0",
-		"@typescript-eslint/eslint-plugin": "^7.14.0",
-		"@typescript-eslint/parser": "^7.14.0",
-		"@vscode/vsce": "^2.25.0",
-		"eslint": "^8.26.0",
-		"typescript": "^5.6.2"
+		"@types/vscode": "^1.0.0",
+		"@typescript-eslint/eslint-plugin": "^8.46.1",
+		"@typescript-eslint/parser": "^8.46.1",
+		"@vscode/test-electron": "^2.3.0",
+		"@vscode/vsce": "^3.6.0",
+		"eslint": "^9.37.0",
+		"mocha": "^10.2.0",
+		"tsup": "^8.1.0",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.46.1"
 	},
 	"dependencies": {
-		"fs-extra": "^10.0.0",
-		"ignore": "^5.2.0"
-	},
-	"peerDependencies": {
-		"@vscode/vsce": "^2.24.0"
+		"fs-extra": "^11.0.4",
+		"ignore": "^5.2.0",
+		"tree-dump": "^1.1.0"
 	},
 	"activationEvents": [
 		"onStartupFinished"

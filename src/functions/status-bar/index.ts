@@ -1,50 +1,95 @@
-import { commands, ExtensionContext, window, StatusBarAlignment, workspace } from 'vscode';
+import { workspace, window, StatusBarAlignment, StatusBarItem, Disposable } from 'vscode';
 
-export function togglePanel(subscriptions: any) {
-  let togglePanelEnable = workspace.getConfiguration("opened-editors").get('togglePanel', true);
-
-  // Status Bar add 'Toggle Panel'
-  const statusBarTerminal = window.createStatusBarItem(StatusBarAlignment.Right, 2);
-  statusBarTerminal.text = '$(terminal-powershell)';
-  statusBarTerminal.tooltip = 'Toggle Panel';
-  statusBarTerminal.command = 'workbench.action.togglePanel';
-  subscriptions.push(statusBarTerminal);
-
-  if (togglePanelEnable) {
-    statusBarTerminal.show();
-  }
-
-  workspace.onDidChangeConfiguration(() => {
-    togglePanelEnable = workspace.getConfiguration("opened-editors").get('togglePanel', true);
-
-    if (togglePanelEnable) {
-      statusBarTerminal.show();
-    } else {
-      statusBarTerminal.hide();
-    }
-  });
+/**
+ * 状态栏按钮配置接口
+ */
+interface StatusBarButtonConfig {
+  configKey: string;        // 配置项键名
+  text: string;             // 按钮显示文本
+  tooltip: string;          // 鼠标悬停提示
+  command: string;          // 按钮关联的命令
+  priority: number;         // 显示优先级（数字越大越靠左）
+  defaultValue?: boolean;   // 默认是否显示
 }
 
-export function openWelcome(subscriptions: any) {
-  let openWelcomeEnable = workspace.getConfiguration("opened-editors").get('openWelcome', true);
+/**
+ * 创建状态栏按钮（工厂函数）
+ * @param config 按钮配置
+ * @param subscriptions 订阅列表（用于生命周期管理）
+ * @returns 状态栏项
+ */
+function createStatusBarButton(
+  config: StatusBarButtonConfig,
+  subscriptions: Disposable[]
+): StatusBarItem {
+  const {
+    configKey,
+    text,
+    tooltip,
+    command,
+    priority,
+    defaultValue = true,
+  } = config;
 
-  const statusBarWelcome = window.createStatusBarItem(StatusBarAlignment.Right, 1);
-  statusBarWelcome.text = '$(heart)';
-  statusBarWelcome.tooltip = 'Open Welcome';
-  statusBarWelcome.command = 'workbench.action.openWalkthrough';
-  subscriptions.push(statusBarWelcome);
+  // 读取配置
+  let isEnabled = workspace.getConfiguration('opened-editors').get(configKey, defaultValue);
 
-  if (openWelcomeEnable) {
-    statusBarWelcome.show();
+  // 创建状态栏项
+  const statusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, priority);
+  statusBarItem.text = text;
+  statusBarItem.tooltip = tooltip;
+  statusBarItem.command = command;
+  subscriptions.push(statusBarItem);
+
+  // 根据配置显示或隐藏
+  if (isEnabled) {
+    statusBarItem.show();
   }
 
+  // 监听配置变更
   workspace.onDidChangeConfiguration(() => {
-    openWelcomeEnable = workspace.getConfiguration("opened-editors").get('openWelcome', false);
+    isEnabled = workspace.getConfiguration('opened-editors').get(configKey, defaultValue);
 
-    if (openWelcomeEnable) {
-      statusBarWelcome.show();
+    if (isEnabled) {
+      statusBarItem.show();
     } else {
-      statusBarWelcome.hide();
+      statusBarItem.hide();
     }
   });
+
+  return statusBarItem;
+}
+
+/**
+ * 创建 Toggle Panel 状态栏按钮
+ */
+export function togglePanel(subscriptions: Disposable[]): void {
+  createStatusBarButton(
+    {
+      configKey: 'togglePanel',
+      text: '$(terminal-powershell)',
+      tooltip: 'Toggle Panel',
+      command: 'workbench.action.togglePanel',
+      priority: 2,
+      defaultValue: true,
+    },
+    subscriptions
+  );
+}
+
+/**
+ * 创建 Open Welcome 状态栏按钮
+ */
+export function openWelcome(subscriptions: Disposable[]): void {
+  createStatusBarButton(
+    {
+      configKey: 'openWelcome',
+      text: '$(heart)',
+      tooltip: 'Open Welcome',
+      command: 'workbench.action.openWalkthrough',
+      priority: 1,
+      defaultValue: false,
+    },
+    subscriptions
+  );
 }

@@ -2,93 +2,135 @@ import { workspace, commands } from 'vscode';
 import { extname } from 'path';
 import { getPath } from '../../utils/path';
 
-function getConfiguration() {
-  const configuration = workspace.getConfiguration();
-  const globalFoldLevel: string = configuration.get<{}>(
-    'opened-editors.fold'
-  ) as string;
-  const foldSpecialConfig = configuration.get<{}>('opened-editors.foldSpecial');
-  const foldNest = configuration.get<{}>('opened-editors.foldNest');
-  const foldSpecials: { [key: string]: string } = { ...foldSpecialConfig };
+// 常量定义
+const MAX_FOLD_LEVEL = 7; // VS Code 支持的最大折叠层级
 
-  return { globalFoldLevel, foldSpecials, foldNest };
+// 类型定义
+type FoldLevel =
+  | 'Level 1'
+  | 'Level 2'
+  | 'Level 3'
+  | 'Level 4'
+  | 'Level 5'
+  | 'Level 6'
+  | 'Level 7'
+  | 'All'
+  | 'All Block Comments'
+  | 'All Regions'
+  | 'All Regions Except Selected'
+  | 'Recursively';
+
+interface FoldConfiguration {
+  globalFoldLevel: FoldLevel;
+  foldSpecials: Record<string, FoldLevel>;
+  foldNest: boolean;
 }
 
-export const foldHandler = (...args: any) => {
+/**
+ * 获取折叠相关配置
+ * @returns 折叠配置对象
+ */
+function getConfiguration(): FoldConfiguration {
+  const configuration = workspace.getConfiguration();
+
+  const globalFoldLevel = configuration.get<FoldLevel>('opened-editors.fold') || 'All';
+  const foldSpecialConfig = configuration.get<Record<string, FoldLevel>>('opened-editors.foldSpecial') || {};
+  const foldNest = configuration.get<boolean>('opened-editors.foldNest') || false;
+
+  return {
+    globalFoldLevel,
+    foldSpecials: { ...foldSpecialConfig },
+    foldNest,
+  };
+}
+
+/**
+ * 折叠命令处理函数
+ * @param args 命令参数
+ */
+export const foldHandler = (...args: any[]): void => {
   const { globalFoldLevel, foldSpecials, foldNest } = getConfiguration();
-  let foldLevel = globalFoldLevel;
-  let foldSpecialsKey: string = '';
+
+  let foldLevel: FoldLevel = globalFoldLevel;
   const fullPath = getPath(args);
-  const extName = extname(fullPath);
-  const foldSpecialsKeys = Object.keys(foldSpecials);
-  const inSpecial = foldSpecialsKeys.some((key) => {
-    const extNames = key.split(',');
-    const match = extNames.some((item) => item.trim() === extName);
 
-    if (match) {
-      foldSpecialsKey = key;
+  if (fullPath) {
+    const extName = extname(fullPath);
+    const foldSpecialsKeys = Object.keys(foldSpecials);
+
+    // 检查当前文件扩展名是否在特殊配置中
+    for (const key of foldSpecialsKeys) {
+      const extNames = key.split(',').map((item) => item.trim());
+
+      if (extNames.includes(extName)) {
+        foldLevel = foldSpecials[key];
+        break;
+      }
     }
-
-    return match;
-  });
-
-  // 如果当前文件：
-  // 1、在特殊设定中，按特殊设定执行
-  // 2、不在特殊设定中，按普通设定执行
-  if (inSpecial) {
-    foldLevel = foldSpecials[foldSpecialsKey];
   }
 
+  // 根据配置选择折叠方式
   if (foldNest) {
     foldByNest(foldLevel);
-    return;
+  } else {
+    foldByNormal(foldLevel);
   }
-
-  foldByNormal(foldLevel);
 };
 
-export const unfoldHandler = (...args: any) => {
-  let command = '';
+/**
+ * 展开命令处理函数
+ * @param args 命令参数
+ */
+export const unfoldHandler = (...args: any[]): void => {
   const { globalFoldLevel } = getConfiguration();
 
-  if (globalFoldLevel === 'All Regions Except Selected') {
-    command = 'editor.unfoldAllExcept';
-  } else if (globalFoldLevel === 'All Regions') {
-    command = 'editor.unfoldAllMarkerRegions';
-  } else if (globalFoldLevel === 'Recursively') {
-    command = 'editor.unfoldRecursively';
-  } else {
-    command = 'editor.unfoldAll';
+  let command = 'editor.unfoldAll';
+
+  // 根据配置选择展开方式
+  switch (globalFoldLevel) {
+    case 'All Regions Except Selected':
+      command = 'editor.unfoldAllExcept';
+      break;
+    case 'All Regions':
+      command = 'editor.unfoldAllMarkerRegions';
+      break;
+    case 'Recursively':
+      command = 'editor.unfoldRecursively';
+      break;
   }
 
   executeCommand(command);
 };
 
 /**
- * 同时折叠内部嵌套层级
+ * 嵌套折叠：同时折叠内部嵌套层级
+ * @param foldLevel 折叠层级
  */
-function foldByNest(foldLevel: string) {
+function foldByNest(foldLevel: FoldLevel): void {
   if (foldLevel === 'All') {
     executeCommand('editor.foldAll');
     return;
   }
 
-  let levelDeep = 0;
-  let levelValue = foldLevel.split('Level ')[1];
-
-  if (levelValue) {
-    levelDeep = Number.parseInt(levelValue);
+  // 提取层级数字
+  const levelMatch = foldLevel.match(/Level (\d+)/);
+  if (!levelMatch) {
+    return;
   }
 
-  for (let index = 7; index >= levelDeep; index -= 1) {
-    executeCommand(`editor.foldLevel${index}`);
+  const levelDeep = parseInt(levelMatch[1], 10);
+
+  // 从最大层级折叠到指定层级
+  for (let level = MAX_FOLD_LEVEL; level >= levelDeep; level--) {
+    executeCommand(`editor.foldLevel${level}`);
   }
 }
 
 /**
- * 仅折叠指定层级
+ * 普通折叠：仅折叠指定层级
+ * @param foldLevel 折叠层级
  */
-function foldByNormal(foldLevel: string) {
+function foldByNormal(foldLevel: FoldLevel): void {
   let command = '';
 
   switch (foldLevel) {
@@ -133,6 +175,12 @@ function foldByNormal(foldLevel: string) {
   executeCommand(command);
 }
 
-function executeCommand(command: string) {
-  commands.executeCommand(command);
+/**
+ * 执行 VS Code 命令
+ * @param command 命令名称
+ */
+function executeCommand(command: string): void {
+  if (command) {
+    commands.executeCommand(command);
+  }
 }

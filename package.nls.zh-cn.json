@@ -21,9 +21,13 @@
   "opened-editors.configuration.foldSpecialDesc": "Opened Editors: 折叠层级 (指定语言：`.js, .jsx`)",
   "opened-editors.configuration.foldNestDesc": "Opened Editors: 同时折叠内部嵌套层级",
   "opened-editors.configuration.formatDocumentDesc": "禁止/启用 Title 菜单图标按钮——格式化文档",
-	"opened-editors.configuration.togglePanel": "状态栏启用切换底部面板",
-	"opened-editors.configuration.openWelcome": "状态栏启用打开欢迎页面",
+  "opened-editors.configuration.togglePanel": "状态栏启用切换底部面板",
+  "opened-editors.configuration.openWelcome": "状态栏启用打开欢迎页面",
+  "opened-editors.configuration.copyAbsolutePath": "禁止/启用 Title 菜单图标按钮——复制文件绝对路径",
+  "opened-editors.configuration.copyRelativePath": "禁止/启用 Title 菜单图标按钮——复制文件相对路径",
   "opened-editors.command.fold": "Opened Editors: 折叠",
   "opened-editors.command.unfold": "Opened Editors: 展开",
-  "opened-editors.command.formatDocument": "Opened Editors: 格式化文档"
+  "opened-editors.command.formatDocument": "Opened Editors: 格式化文档",
+  "opened-editors.command.copyAbsolutePath": "Opened Editors: 复制绝对路径",
+  "opened-editors.command.copyRelativePath": "Opened Editors: 复制相对路径"
 }

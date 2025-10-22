@@ -1,0 +1,19 @@
+arrowParens: "always"               # 箭头函数参数始终使用括号，例如 (x) => x
+bracketSameLine: false              # HTML 标签的 > 不放在同一行，而是换行显示
+bracketSpacing: true                # 对象字面量的括号与内容之间添加空格，例如 { foo: bar }
+embeddedLanguageFormatting: "auto"  # 自动格式化嵌入的代码，如模板字符串中的代码
+endOfLine: "lf"                     # 使用 LF 作为行尾字符 (Unix 风格)
+htmlWhitespaceSensitivity: "ignore" # 忽略 HTML 文件中的空格敏感度
+jsxSingleQuote: false               # JSX 属性使用双引号而不是单引号
+printWidth: 120                     # 每行代码的最大字符数为 120
+proseWrap: "preserve"               # 保持 Markdown 文本的换行方式不变 (由 markdownlint 控制)
+quoteProps: "as-needed"             # 对象属性仅在必要时使用引号
+requirePragma: false                # 不要求文件顶部有特定注释才格式化
+semi: true                          # 在语句末尾添加分号
+singleAttributePerLine: false       # 不强制要求每个 HTML 属性单独占一行
+singleQuote: true                   # 使用单引号而不是双引号
+tabWidth: 2                         # 缩进使用 2 个空格
+trailingComma: "es5"                # 使用 ES5 兼容的尾随逗号 (对象、数组等)
+useTabs: false                      # 使用空格而不是制表符 (Tab) 进行缩进
+vueIndentScriptAndStyle: false      # 不缩进 Vue 文件中的 script 和 style 标签内容
+# https://prettier.io/docs/options
