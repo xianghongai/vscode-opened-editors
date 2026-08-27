@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 
 name: Publish VS Code Extension — GitHub Action
+run-name: 'Release: ${{ github.ref_name }}'
 
 permissions:
   contents: read
