@@ -1,19 +1,20 @@
-<p>
-  <h1 align="center">VSCode Opened Editors</h1>
-</p>
+# VSCode Opened Editors
 
-<p align="center">
+<p>
   <a href="https://github.com/xianghongai/vscode-opened-editors">
-    <img src="https://img.shields.io/github/repo-size/xianghongai/vscode-opened-editors?color=4ac51c&style=plastic&?cacheSeconds=3600">
+    <img src="https://img.shields.io/github/repo-size/xianghongai/vscode-opened-editors?color=4ac51c&style=plastic" alt="Repo Size">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nicholashsiang.vscode-opened-editors">
-    <img src="https://img.shields.io/visual-studio-marketplace/v/nicholashsiang.vscode-opened-editors?color=%234ac51c&style=plastic&?cacheSeconds=3600">
+    <img src="https://vsmarketplacebadges.dev/version/nicholashsiang.vscode-opened-editors.svg?style=plastic&color=4ac51c" alt="Visual Studio Marketplace Version">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nicholashsiang.vscode-opened-editors">
-    <img src="https://img.shields.io/visual-studio-marketplace/d/nicholashsiang.vscode-opened-editors?color=4ac51c&style=plastic&?cacheSeconds=3600">
+    <img src="https://vsmarketplacebadges.dev/downloads-short/nicholashsiang.vscode-opened-editors.svg?style=plastic&color=4ac51c" alt="Downloads">
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nicholashsiang.vscode-opened-editors">
-    <img src="https://img.shields.io/github/license/xianghongai/vscode-opened-editors?color=4ac51c&style=plastic&?cacheSeconds=3600">
+    <img src="https://vsmarketplacebadges.dev/rating-short/nicholashsiang.vscode-opened-editors.svg?style=plastic&color=4ac51c" alt="Rating">
+  </a>
+  <a href="https://github.com/xianghongai/vscode-opened-editors/blob/HEAD/LICENSE">
+    <img src="https://img.shields.io/github/license/xianghongai/vscode-opened-editors?color=4ac51c&style=plastic" alt="License">
   </a>
 </p>
 
@@ -43,7 +44,9 @@
 
 ## 状态栏
 
-- 底部面板开关
+- `Close Window` - 关闭当前 VS Code 窗口 (在 macOS 全屏模式下用到)
+- `Toggle Panel` - 切换底部面板
+- `Open Welcome` - 打开欢迎页面（默认隐藏，可在设置中启用）
 
 ---
 

@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "commonjs",
+    "module": "preserve",
     "lib": ["ES2022"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "sourceMap": true,
     "rootDir": "src",
     "outDir": "dist",
-    "baseUrl": ".",
+    "types": ["node", "vscode"],
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["./src/*"],
     }
   },
   "include": ["src/**/*"],

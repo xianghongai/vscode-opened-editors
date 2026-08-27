@@ -2,39 +2,47 @@ import { env } from 'vscode';
 import { extname, basename } from 'path';
 import { getPath, copyPath as copyPathHandler, precondition } from '../../utils/path';
 
-export const copyPath = (...args: any) => {
+export const copyPath = async (...args: unknown[]): Promise<void> => {
   if (!precondition()) {
     return;
   }
 
-  copyPathHandler(args, 'path');
+  await copyPathHandler(args, 'path');
 };
 
-export const copyFolderName = (...args: any) => {
+export const copyFolderName = async (...args: unknown[]): Promise<void> => {
   if (!precondition()) {
     return;
   }
 
-  copyPathHandler(args, 'folder');
+  await copyPathHandler(args, 'folder');
 };
 
-export const copyFileName = (...args: any) => {
+export const copyFileName = async (...args: unknown[]): Promise<void> => {
   if (!precondition()) {
     return;
   }
 
   const fullPath = getPath(args);
+  if (!fullPath) {
+    return;
+  }
+
   const extName = extname(fullPath);
   const fileName = basename(fullPath, extName);
-  env.clipboard.writeText(fileName);
+  await env.clipboard.writeText(fileName);
 };
 
-export const copyFileNameWithExtension = (...args: any) => {
+export const copyFileNameWithExtension = async (...args: unknown[]): Promise<void> => {
   if (!precondition()) {
     return;
   }
 
   const fullPath = getPath(args);
+  if (!fullPath) {
+    return;
+  }
+
   const fileName = basename(fullPath);
-  env.clipboard.writeText(fileName);
+  await env.clipboard.writeText(fileName);
 };

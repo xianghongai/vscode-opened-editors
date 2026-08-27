@@ -13,7 +13,7 @@ module.exports = [
     // 应用于 TypeScript 文件
     files: ['src/**/*.ts'],
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-require-imports': 'off',
       curly: 'warn',

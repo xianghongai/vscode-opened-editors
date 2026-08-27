@@ -8,7 +8,7 @@ import {
 } from '@/functions/path';
 import { foldHandler, unfoldHandler } from '@/functions/fold';
 import { fileTreeGenerator } from '@/functions/file-tree';
-import { openWelcome, togglePanel } from '@/functions/status-bar';
+import { registerStatusBarButtons } from '@/functions/status-bar';
 import { copyAbsolutePath, copyRelativePath } from '@/utils/path';
 
 /**
@@ -16,7 +16,7 @@ import { copyAbsolutePath, copyRelativePath } from '@/utils/path';
  */
 interface CommandConfig {
   id: string;
-  handler: (...args: any[]) => any;
+  handler: (...args: unknown[]) => unknown;
 }
 
 /**
@@ -95,8 +95,7 @@ export function activate({ subscriptions }: ExtensionContext) {
   });
 
   // 注册状态栏按钮
-  togglePanel(subscriptions);
-  openWelcome(subscriptions);
+  registerStatusBarButtons(subscriptions);
 }
 
 /**

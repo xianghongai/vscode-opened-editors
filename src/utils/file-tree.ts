@@ -5,7 +5,8 @@
 
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import { WorkspaceConfiguration } from 'vscode';
+import type { Dirent } from 'fs';
+import type { WorkspaceConfiguration } from 'vscode';
 import ignore from 'ignore';
 import { printTree } from 'tree-dump';
 
@@ -20,12 +21,13 @@ interface FileNode {
 
 interface ParserParams {
   target: string;
-  rules: IgnoreRule[];
+  rules: ScopedIgnoreRule[];
+  rootExclude: ScopedIgnoreRule | null;
   currentDepth: number;
   depth: number;
 }
 
-interface IgnoreRule {
+interface ScopedIgnoreRule {
   root: string;
   rule: ReturnType<typeof ignore>;
 }
@@ -33,38 +35,28 @@ interface IgnoreRule {
 /**
  * 读取目录下的 .gitignore 文件并解析规则
  * @param dir 目录路径
- * @param files .gitignore 文件列表
+ * @param entries 当前目录项
  * @returns ignore 规则对象或 null
  */
-async function getIgnore(dir: string, files: string[]): Promise<ReturnType<typeof ignore> | null> {
-  const ignores: string[] = [];
-
-  for (const fileItem of files) {
-    const filePath = path.join(dir, fileItem);
-
-    try {
-      const fileStatus = await fs.stat(filePath);
-
-      if (fileStatus.isFile()) {
-        const content = await fs.readFile(filePath, 'utf-8');
-        const lines = content
-          .split(/\r?\n/)
-          .map((line: string) => line.trim())
-          .filter((line: string) => !!line && !line.startsWith('#')); // 过滤空行和注释
-
-        ignores.push(...lines);
-      }
-    } catch (error) {
-      // 跳过无法读取的文件（权限问题等）
-      console.warn(`无法读取 .gitignore 文件: ${filePath}`, error);
-    }
-  }
-
-  if (!ignores.length) {
+async function getIgnore(
+  dir: string,
+  entries: readonly Dirent[]
+): Promise<ReturnType<typeof ignore> | null> {
+  const ignoreEntry = entries.find(
+    (entry) => entry.isFile() && EXCLUDE.includes(entry.name)
+  );
+  if (!ignoreEntry) {
     return null;
   }
 
-  return ignore().add(ignores);
+  const filePath = path.join(dir, ignoreEntry.name);
+  try {
+    const content = await fs.readFile(filePath, 'utf-8');
+    return content ? ignore().add(content) : null;
+  } catch (error) {
+    console.warn(`无法读取 .gitignore 文件: ${filePath}`, error);
+    return null;
+  }
 }
 
 /**
@@ -76,6 +68,7 @@ async function parser(params: ParserParams): Promise<FileNode[]> {
   const {
     target,
     rules = [],
+    rootExclude,
     currentDepth = 0,
     depth = Number.MAX_SAFE_INTEGER,
   } = params;
@@ -88,19 +81,19 @@ async function parser(params: ParserParams): Promise<FileNode[]> {
   const nodes: FileNode[] = [];
 
   try {
-    const children = await fs.readdir(target);
-    const excludeFiles = children.filter((item: string) => EXCLUDE.includes(item));
-    const rule = await getIgnore(target, excludeFiles);
-
-    if (rule) {
-      rules.push({
-        root: target,
-        rule,
-      });
-    }
+    const children = await fs.readdir(target, { withFileTypes: true });
+    const rule = await getIgnore(target, children);
+    const effectiveRules = rule
+      ? [...rules, { root: target, rule }]
+      : rules;
 
     // 分类文件和文件夹
-    const { folders, files } = await classifyItems(target, children, rules);
+    const { folders, files } = classifyItems(
+      target,
+      children,
+      effectiveRules,
+      rootExclude
+    );
 
     // 处理文件夹（递归）
     for (const folder of folders) {
@@ -108,7 +101,8 @@ async function parser(params: ParserParams): Promise<FileNode[]> {
 
       const subChildren = await parser({
         target: filePath,
-        rules,
+        rules: effectiveRules,
+        rootExclude,
         currentDepth: currentDepth + 1,
         depth,
       });
@@ -143,33 +137,28 @@ async function parser(params: ParserParams): Promise<FileNode[]> {
  * @param rules 忽略规则列表
  * @returns 分类后的文件夹和文件数组
  */
-async function classifyItems(
+function classifyItems(
   target: string,
-  children: string[],
-  rules: IgnoreRule[]
-): Promise<{ folders: string[]; files: string[] }> {
+  children: readonly Dirent[],
+  rules: readonly ScopedIgnoreRule[],
+  rootExclude: ScopedIgnoreRule | null
+): { folders: string[]; files: string[] } {
   const folders: string[] = [];
   const files: string[] = [];
 
-  for (const item of children) {
-    const itemPath = path.join(target, item);
+  for (const entry of children) {
+    const itemPath = path.join(target, entry.name);
+    const isDirectory = entry.isDirectory();
 
     // 检查是否应该忽略
-    if (await shouldIgnore(itemPath, item, rules)) {
+    if (shouldIgnore(itemPath, isDirectory, rules, rootExclude)) {
       continue;
     }
 
-    try {
-      const fileStatus = await fs.stat(itemPath);
-
-      if (fileStatus.isFile()) {
-        files.push(item);
-      } else if (fileStatus.isDirectory()) {
-        folders.push(item);
-      }
-    } catch (error) {
-      // 跳过无法访问的项（符号链接损坏、权限问题等）
-      console.warn(`无法访问: ${itemPath}`, error);
+    if (isDirectory) {
+      folders.push(entry.name);
+    } else if (entry.isFile() || entry.isSymbolicLink()) {
+      files.push(entry.name);
     }
   }
 
@@ -179,26 +168,55 @@ async function classifyItems(
 /**
  * 检查文件或文件夹是否应该被忽略
  * @param itemPath 项目完整路径
- * @param item 项目名称
+ * @param isDirectory 是否为目录
  * @param rules 忽略规则列表
  * @returns 是否应该忽略
  */
-async function shouldIgnore(itemPath: string, item: string, rules: IgnoreRule[]): Promise<boolean> {
+function shouldIgnore(
+  itemPath: string,
+  isDirectory: boolean,
+  rules: readonly ScopedIgnoreRule[],
+  rootExclude: ScopedIgnoreRule | null
+): boolean {
+  if (rootExclude && evaluateRules(itemPath, isDirectory, [rootExclude])) {
+    return true;
+  }
+
+  return evaluateRules(itemPath, isDirectory, rules);
+}
+
+function evaluateRules(
+  itemPath: string,
+  isDirectory: boolean,
+  rules: readonly ScopedIgnoreRule[]
+): boolean {
+  let isIgnored = false;
+
   for (const { rule, root } of rules) {
     const relativePath = path.relative(root, itemPath);
-    const excludePath = path.join(relativePath, item);
 
     // 如果路径在规则的根目录之外，跳过此规则
-    if (excludePath.startsWith('..')) {
+    if (
+      !relativePath ||
+      relativePath === '..' ||
+      relativePath.startsWith(`..${path.sep}`) ||
+      path.isAbsolute(relativePath)
+    ) {
       continue;
     }
 
-    if (rule.ignores(excludePath)) {
-      return true;
+    const normalizedPath = relativePath.split(path.sep).join('/');
+    const candidate = isDirectory ? `${normalizedPath}/` : normalizedPath;
+    const result = rule.test(candidate);
+
+    if (result.ignored) {
+      isIgnored = true;
+    } else if (result.unignored) {
+      isIgnored = false;
     }
   }
 
-  return false;
+  return isIgnored;
 }
 
 /**
@@ -227,13 +245,14 @@ async function buildTree(
   exclude: string[] = [],
   depth: number
 ): Promise<FileNode> {
-  const rules: IgnoreRule[] = exclude.length
-    ? [{ root: dir, rule: ignore().add(exclude) }]
-    : [];
+  const rootExclude: ScopedIgnoreRule | null = exclude.length
+    ? { root: dir, rule: ignore().add(exclude) }
+    : null;
 
   const children = await parser({
     target: dir,
-    rules,
+    rules: [],
+    rootExclude,
     currentDepth: 0,
     depth,
   });
