@@ -1,0 +1,21 @@
+version: 2
+
+updates:
+  # 保持 pnpm-lock.yaml 常新：绝大多数安全告警来自开发期传递依赖，
+  # 只有直接依赖的版本区间随之抬升，安全版本才可解析，
+  # 否则 Dependabot 会反复产出 security_update_not_possible 的失败运行。
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      production-dependencies:
+        dependency-type: production
+      development-dependencies:
+        dependency-type: development
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

@@ -330,13 +330,13 @@
 		}
 	},
 	"scripts": {
-		"clean": "rimraf --glob \"*.vsix\" \"snippets/*\"",
-		"prebuild": "pnpm run typecheck",
 		"build": "tsup --config tsup.config.ts --minify",
-		"precompile": "pnpm run typecheck",
+		"clean": "rimraf --glob \"*.vsix\" dist",
 		"compile": "tsup --config tsup.config.ts",
 		"lint": "eslint src",
 		"package": "vsce package --no-dependencies",
+		"prebuild": "pnpm run typecheck",
+		"precompile": "pnpm run typecheck",
 		"publish": "vsce publish --no-dependencies",
 		"test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test test/status-bar.test.mjs test/path.test.mjs test/file-tree.test.mjs test/fold.test.mjs",
 		"typecheck": "tsc --noEmit",

@@ -35,7 +35,9 @@ jobs:
         run: pnpm run typecheck
 
       - name: Test
-        run: pnpm test
+        run: pnpm run test
 
       - name: Publish
-        run: pnpm exec vsce publish -p ${{ secrets.VS_MARKETPLACE_TOKEN }}
+        run: pnpm run publish
+        env:
+          VSCE_PAT: ${{ secrets.VS_MARKETPLACE_TOKEN }}
