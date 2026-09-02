@@ -2,7 +2,7 @@
  * VS Code API 的测试替身。
  *
  * `vitest.config.mts` 把 `vscode` 这个 specifier 别名到本文件，被测模块因此拿到它
- * 而不是真实 API。类型按替身实际暴露的契约写——刻意不去实现 `@types/vscode` 的完整接口，
+ * 而不是真实 API。类型按替身实际暴露的契约写，刻意不去实现 `@types/vscode` 的完整接口，
  * 那既做不到也无必要；测试只断言这里记录下来的调用。
  */
 

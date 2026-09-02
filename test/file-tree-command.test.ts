@@ -45,7 +45,7 @@ function captureConsoleError() {
 /**
  * 造一个挂起的剪贴板写入，并给出「写入已发起」的确定性信号。
  *
- * 不用 `setTimeout(0)` 等 `creator()` 跑完——那依赖文件系统在一个宏任务内返回，
+ * 不用 `setTimeout(0)` 等 `creator()` 跑完，那依赖文件系统在一个宏任务内返回，
  * 机器一忙就会假失败。
  */
 function pendingClipboardWrite() {
