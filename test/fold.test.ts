@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { registerHooks } from 'node:module';
-import test from 'node:test';
+import { beforeEach, test } from 'vitest';
 
 import {
   executedCommands,
@@ -8,33 +7,13 @@ import {
   setActiveTextEditor,
   setCommandExecutionImplementation,
   setConfiguration,
-} from './fixtures/vscode.mjs';
-
-const vscodeModuleUrl = new URL('./fixtures/vscode.mjs', import.meta.url).href;
-
-registerHooks({
-  resolve(specifier, context, nextResolve) {
-    if (specifier === 'vscode') {
-      return {
-        shortCircuit: true,
-        url: vscodeModuleUrl,
-      };
-    }
-
-    if (specifier === '../../utils/path') {
-      return nextResolve(`${specifier}.ts`, context);
-    }
-
-    return nextResolve(specifier, context);
-  },
-});
+} from './fixtures/vscode';
 
 const { foldHandler, unfoldHandler } = await import('../src/functions/fold/index.ts');
 
-const waitForCommandContinuation = () =>
-  new Promise((resolve) => setImmediate(resolve));
+const waitForCommandContinuation = () => new Promise((resolve) => setImmediate(resolve));
 
-test.beforeEach(resetVscodeTestState);
+beforeEach(resetVscodeTestState);
 
 test('maps public fold settings to VS Code commands', async () => {
   setConfiguration('opened-editors.fold', 'Level 2');
@@ -59,13 +38,14 @@ test('applies special extension fold levels', async () => {
 });
 
 test('awaits nested fold commands from deepest to requested level', async () => {
-  const pending = [];
+  const pending: Array<() => void> = [];
   setConfiguration('opened-editors.fold', 'Level 3');
   setConfiguration('opened-editors.foldNest', true);
   setCommandExecutionImplementation(
-    () => new Promise((resolve) => {
-      pending.push(resolve);
-    })
+    () =>
+      new Promise((resolve) => {
+        pending.push(resolve);
+      })
   );
 
   const operation = foldHandler();
@@ -73,12 +53,12 @@ test('awaits nested fold commands from deepest to requested level', async () => 
   assert.deepEqual(executedCommands, ['editor.foldLevel7']);
 
   for (const level of [6, 5, 4, 3]) {
-    pending.shift()();
+    pending.shift()?.();
     await waitForCommandContinuation();
     assert.equal(executedCommands.at(-1), `editor.foldLevel${level}`);
   }
 
-  pending.shift()();
+  pending.shift()?.();
   await operation;
   assert.deepEqual(executedCommands, [
     'editor.foldLevel7',

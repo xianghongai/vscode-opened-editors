@@ -1,0 +1,23 @@
+# 全部排除，再按需放行
+# Exclude everything, then allow-list what ships.
+#
+# vsce 另有一份内置排除清单（.vscodeignore 自身、package-lock.json、.editorconfig、
+# .npmrc、.eslintrc*、.prettierrc* 等）始终生效，无需在此重复。
+# package.json 与 README.md 由 vsce 强制放行，列在下面只为让清单完整可读。
+**
+
+# ── 扩展本体 / Extension ──────────
+!package.json
+!dist/extension.js
+
+# ── 图标与本地化 / Icons and i18n ──
+# art/*.svg 是 contributes.commands 引用的编辑器标题栏按钮图标，必须进包。
+# art/icon.png 是 Marketplace 图标，由 package.json 的 icon 字段引用。
+!art/*.svg
+!art/icon.png
+!package.nls*.json
+
+# ── Marketplace 展示 / Listing ────
+!README.md
+!CHANGELOG.md
+!LICENSE

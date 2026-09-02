@@ -1,11 +1,5 @@
-'use strict';
 import { commands, ExtensionContext } from 'vscode';
-import {
-  copyPath,
-  copyFolderName,
-  copyFileName,
-  copyFileNameWithExtension,
-} from '@/functions/path';
+import { copyPath, copyFolderName, copyFileName, copyFileNameWithExtension } from '@/functions/path';
 import { foldHandler, unfoldHandler } from '@/functions/fold';
 import { fileTreeGenerator } from '@/functions/file-tree';
 import { registerStatusBarButtons } from '@/functions/status-bar';

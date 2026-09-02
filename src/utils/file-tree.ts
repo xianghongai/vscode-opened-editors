@@ -10,7 +10,7 @@ import type { WorkspaceConfiguration } from 'vscode';
 import ignore from 'ignore';
 import { printTree } from 'tree-dump';
 
-const EXCLUDE = ['.gitignore'];
+const IGNORE_FILES = ['.gitignore'];
 
 // 类型定义
 interface FileNode {
@@ -38,13 +38,8 @@ interface ScopedIgnoreRule {
  * @param entries 当前目录项
  * @returns ignore 规则对象或 null
  */
-async function getIgnore(
-  dir: string,
-  entries: readonly Dirent[]
-): Promise<ReturnType<typeof ignore> | null> {
-  const ignoreEntry = entries.find(
-    (entry) => entry.isFile() && EXCLUDE.includes(entry.name)
-  );
+async function getIgnore(dir: string, entries: readonly Dirent[]): Promise<ReturnType<typeof ignore> | null> {
+  const ignoreEntry = entries.find((entry) => entry.isFile() && IGNORE_FILES.includes(entry.name));
   if (!ignoreEntry) {
     return null;
   }
@@ -65,13 +60,7 @@ async function getIgnore(
  * @returns 文件节点数组
  */
 async function parser(params: ParserParams): Promise<FileNode[]> {
-  const {
-    target,
-    rules = [],
-    rootExclude,
-    currentDepth = 0,
-    depth = Number.MAX_SAFE_INTEGER,
-  } = params;
+  const { target, rules = [], rootExclude, currentDepth = 0, depth = Number.MAX_SAFE_INTEGER } = params;
 
   // 达到指定深度，停止递归
   if (currentDepth >= depth) {
@@ -83,17 +72,10 @@ async function parser(params: ParserParams): Promise<FileNode[]> {
   try {
     const children = await fs.readdir(target, { withFileTypes: true });
     const rule = await getIgnore(target, children);
-    const effectiveRules = rule
-      ? [...rules, { root: target, rule }]
-      : rules;
+    const effectiveRules = rule ? [...rules, { root: target, rule }] : rules;
 
     // 分类文件和文件夹
-    const { folders, files } = classifyItems(
-      target,
-      children,
-      effectiveRules,
-      rootExclude
-    );
+    const { folders, files } = classifyItems(target, children, effectiveRules, rootExclude);
 
     // 处理文件夹（递归）
     for (const folder of folders) {
@@ -185,11 +167,7 @@ function shouldIgnore(
   return evaluateRules(itemPath, isDirectory, rules);
 }
 
-function evaluateRules(
-  itemPath: string,
-  isDirectory: boolean,
-  rules: readonly ScopedIgnoreRule[]
-): boolean {
+function evaluateRules(itemPath: string, isDirectory: boolean, rules: readonly ScopedIgnoreRule[]): boolean {
   let isIgnored = false;
 
   for (const { rule, root } of rules) {
@@ -225,7 +203,7 @@ function evaluateRules(
  * @returns tree-dump 函数数组
  */
 function toTreeFunctions(nodes: FileNode[]): Array<(tab: string) => string> {
-  return nodes.map(node => (tab: string) => {
+  return nodes.map((node) => (tab: string) => {
     if (node.children && node.children.length > 0) {
       return node.name + printTree(tab, toTreeFunctions(node.children));
     }
@@ -240,14 +218,8 @@ function toTreeFunctions(nodes: FileNode[]): Array<(tab: string) => string> {
  * @param depth 最大深度
  * @returns 根节点
  */
-async function buildTree(
-  dir: string,
-  exclude: string[] = [],
-  depth: number
-): Promise<FileNode> {
-  const rootExclude: ScopedIgnoreRule | null = exclude.length
-    ? { root: dir, rule: ignore().add(exclude) }
-    : null;
+async function buildTree(dir: string, exclude: string[] = [], depth: number): Promise<FileNode> {
+  const rootExclude: ScopedIgnoreRule | null = exclude.length ? { root: dir, rule: ignore().add(exclude) } : null;
 
   const children = await parser({
     target: dir,

@@ -4,12 +4,12 @@ import { workspace, window, StatusBarAlignment, StatusBarItem, Disposable } from
  * 状态栏按钮配置接口
  */
 interface StatusBarButtonConfig {
-  configKey: string;       // 配置项键名
-  text: string;            // 按钮显示文本
-  tooltip: string;         // 鼠标悬停提示
-  command: string;         // 按钮关联的命令
-  priority: number;        // 显示优先级（数字越大越靠左）
-  defaultValue: boolean;   // 默认是否显示
+  configKey: string; // 配置项键名
+  text: string; // 按钮显示文本
+  tooltip: string; // 鼠标悬停提示
+  command: string; // 按钮关联的命令
+  priority: number; // 显示优先级（数字越大越靠左）
+  defaultValue: boolean; // 默认是否显示
 }
 
 const statusBarButtons = [
@@ -45,33 +45,17 @@ const statusBarButtons = [
  * @param subscriptions 订阅列表（用于生命周期管理）
  * @returns 状态栏项
  */
-function createStatusBarButton(
-  config: StatusBarButtonConfig,
-  subscriptions: Disposable[]
-): StatusBarItem {
-  const {
-    configKey,
-    text,
-    tooltip,
-    command,
-    priority,
-    defaultValue,
-  } = config;
+function createStatusBarButton(config: StatusBarButtonConfig, subscriptions: Disposable[]): StatusBarItem {
+  const { configKey, text, tooltip, command, priority, defaultValue } = config;
   const settingId = `opened-editors.${configKey}`;
 
-  const statusBarItem = window.createStatusBarItem(
-    settingId,
-    StatusBarAlignment.Right,
-    priority
-  );
+  const statusBarItem = window.createStatusBarItem(settingId, StatusBarAlignment.Right, priority);
   statusBarItem.text = text;
   statusBarItem.tooltip = tooltip;
   statusBarItem.command = command;
 
   const updateVisibility = (): void => {
-    const isEnabled = workspace
-      .getConfiguration('opened-editors')
-      .get<boolean>(configKey, defaultValue);
+    const isEnabled = workspace.getConfiguration('opened-editors').get<boolean>(configKey, defaultValue);
 
     if (isEnabled === true) {
       statusBarItem.show();
@@ -97,7 +81,5 @@ function createStatusBarButton(
  * 注册全部状态栏按钮
  */
 export function registerStatusBarButtons(subscriptions: Disposable[]): void {
-  statusBarButtons.forEach((config) =>
-    createStatusBarButton(config, subscriptions)
-  );
+  statusBarButtons.forEach((config) => createStatusBarButton(config, subscriptions));
 }

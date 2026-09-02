@@ -1,31 +1,15 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { registerHooks } from 'node:module';
-import test from 'node:test';
+import { beforeEach, test } from 'vitest';
 
 import {
   createdStatusBarItems,
   emitConfigurationChange,
   resetVscodeTestState,
   setConfiguration,
-} from './fixtures/vscode.mjs';
+} from './fixtures/vscode';
 
-const vscodeModuleUrl = new URL('./fixtures/vscode.mjs', import.meta.url).href;
-
-registerHooks({
-  resolve(specifier, context, nextResolve) {
-    if (specifier === 'vscode') {
-      return {
-        shortCircuit: true,
-        url: vscodeModuleUrl,
-      };
-    }
-
-    return nextResolve(specifier, context);
-  },
-});
-
-test.beforeEach(resetVscodeTestState);
+beforeEach(resetVscodeTestState);
 
 test('registers every status-bar action through one entry point', async () => {
   const { registerStatusBarButtons } = await import('../src/functions/status-bar/index.ts');
@@ -36,12 +20,10 @@ test('registers every status-bar action through one entry point', async () => {
     'a single status-bar registration entry point should be exported'
   );
 
-  const subscriptions = [];
+  const subscriptions: Array<{ dispose(): void }> = [];
   registerStatusBarButtons(subscriptions);
 
-  const itemsByCommand = Object.fromEntries(
-    createdStatusBarItems.map((item) => [item.command, item])
-  );
+  const itemsByCommand = Object.fromEntries(createdStatusBarItems.map((item) => [item.command, item]));
   const closeWindowItem = itemsByCommand['workbench.action.closeWindow'];
   const togglePanelItem = itemsByCommand['workbench.action.togglePanel'];
   const openWelcomeItem = itemsByCommand['workbench.action.openWalkthrough'];
@@ -64,12 +46,11 @@ test('updates only the affected item and releases configuration listeners', asyn
 
   assert.equal(typeof registerStatusBarButtons, 'function');
 
-  const subscriptions = [];
+  const subscriptions: Array<{ dispose(): void }> = [];
   registerStatusBarButtons(subscriptions);
 
-  const closeWindowItem = createdStatusBarItems.find(
-    ({ command }) => command === 'workbench.action.closeWindow'
-  );
+  const closeWindowItem = createdStatusBarItems.find(({ command }) => command === 'workbench.action.closeWindow');
+  assert.ok(closeWindowItem, 'the close-window button should have been created');
 
   setConfiguration('opened-editors.closeWindow', false);
   emitConfigurationChange('editor.fontSize');

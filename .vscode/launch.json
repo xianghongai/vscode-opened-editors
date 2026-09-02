@@ -10,7 +10,9 @@
       "type": "extensionHost",
       "request": "launch",
       "runtimeExecutable": "${execPath}",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      // --disable-extensions 关闭宿主里所有已安装的扩展，只保留由
+      // --extensionDevelopmentPath 加载的本扩展，排除其它扩展的干扰。
+      "args": ["--disable-extensions", "--extensionDevelopmentPath=${workspaceFolder}"],
       "outFiles": ["${workspaceFolder}/dist/**/*.js"],
       "preLaunchTask": "npm: compile"
     }

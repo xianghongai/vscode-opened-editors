@@ -1,6 +1,6 @@
 import { env } from 'vscode';
 import { extname, basename } from 'path';
-import { getPath, copyPath as copyPathHandler, precondition } from '../../utils/path';
+import { getPath, copyPath as copyPathHandler, precondition } from '@/utils/path';
 
 export const copyPath = async (...args: unknown[]): Promise<void> => {
   if (!precondition()) {

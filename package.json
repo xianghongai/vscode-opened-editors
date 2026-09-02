@@ -1,364 +1,358 @@
 {
-	"name": "vscode-opened-editors",
-	"publisher": "NicholasHsiang",
-	"displayName": "%ext.displayName%",
-	"description": "%ext.description%",
-	"icon": "art/icon.png",
-	"version": "2.6.0",
-	"license": "MIT",
-	"packageManager": "pnpm@11.24.0",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/xianghongai/vscode-opened-editors/"
-	},
-	"engines": {
-		"vscode": "^1.100.0",
-		"node": ">=24"
-	},
-	"categories": [
-		"Other"
-	],
-	"keywords": [
-		"reveal sidebar",
-		"opened editors",
-		"path name",
-		"pathname",
-		"folder name",
-		"file name",
-		"filename",
-		"copy path name",
-		"copy folder name",
-		"copy file name"
-	],
-	"main": "./dist/extension.js",
-	"files": [
-		"dist/extension.js",
-		"art/*.svg",
-		"art/icon.png",
-		"package.nls*.json",
-		"README.md",
-		"CHANGELOG.md",
-		"LICENSE"
-	],
-	"contributes": {
-		"configuration": {
-			"title": "Opened Editors",
-			"properties": {
-				"opened-editors.formatDocument": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.formatDocumentDesc%"
-				},
-				"opened-editors.revealSidebar": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.revealSidebarDesc%"
-				},
-				"opened-editors.openedEditors": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.openedEditorsDesc%"
-				},
-				"opened-editors.copyFileName": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.copyFileNameDesc%"
-				},
-				"opened-editors.copyFolderName": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.copyFolderNameDesc%"
-				},
-				"opened-editors.fileTreeExclude": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					},
-					"default": [
-						".*"
-					],
-					"markdownDescription": "%opened-editors.configuration.fileTreeExcludeDesc%"
-				},
-				"opened-editors.fileTreeGeneratorDepth": {
-					"type": "number",
-					"default": 20,
-					"markdownDescription": "%opened-editors.configuration.fileTreeGeneratorDepthDesc%"
-				},
-				"opened-editors.fileTreeExportType": {
-					"type": "string",
-					"default": "markdown",
-					"enum": [
-						"markdown",
-						"txt"
-					],
-					"markdownDescription": "%opened-editors.configuration.fileTreeExportTypeDesc%"
-				},
-				"opened-editors.foldEnable": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.foldEnableDesc%"
-				},
-				"opened-editors.fold": {
-					"type": "string",
-					"default": "All",
-					"enum": [
-						"Level 1",
-						"Level 2",
-						"Level 3",
-						"Level 4",
-						"Level 5",
-						"Level 6",
-						"Level 7",
-						"All"
-					],
-					"markdownDescription": "%opened-editors.configuration.foldDesc%"
-				},
-				"opened-editors.foldSpecial": {
-					"type": "object",
-					"default": {
-						".ts, .tsx": "Level 1",
-						".js, .jsx": "Level 1",
-						".vue": "Level 4",
-						".json": "Level 2"
-					},
-					"additionalProperties": {
-						"anyOf": [
-							{
-								"type": "string",
-								"enum": [
-									"Level 1",
-									"Level 2",
-									"Level 3",
-									"Level 4",
-									"Level 5",
-									"Level 6",
-									"Level 7",
-									"All"
-								]
-							}
-						]
-					},
-					"markdownDescription": "%opened-editors.configuration.foldSpecialDesc%"
-				},
-				"opened-editors.foldNest": {
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.foldNestDesc%"
-				},
-				"opened-editors.togglePanel": {
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.togglePanel%"
-				},
-				"opened-editors.closeWindow": {
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.closeWindow%"
-				},
-				"opened-editors.openWelcome": {
-					"type": "boolean",
-					"default": false,
-					"description": "%opened-editors.configuration.openWelcome%"
-				},
-				"opened-editors.copyAbsolutePath": {
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.copyAbsolutePath%"
-				},
-				"opened-editors.copyRelativePath": {
-					"type": "boolean",
-					"default": true,
-					"description": "%opened-editors.configuration.copyRelativePath%"
-				}
-			}
-		},
-		"commands": [
-			{
-				"command": "opened-editors.formatDocument",
-				"title": "%opened-editors.command.formatDocument%",
-				"icon": {
-					"light": "art/format-document-gray.svg",
-					"dark": "art/format-document-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.revealSidebar",
-				"title": "%opened-editors.command.revealSidebar%",
-				"icon": {
-					"light": "art/reveal-gray.svg",
-					"dark": "art/reveal-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.openedEditors",
-				"title": "%opened-editors.command.openedEditors%",
-				"icon": {
-					"light": "art/dropdown-gray.svg",
-					"dark": "art/dropdown-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.copyPath",
-				"title": "%opened-editors.command.copyPath%",
-				"icon": {
-					"light": "art/folder-gray.svg",
-					"dark": "art/folder-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.copyFolderName",
-				"title": "%opened-editors.command.copyFolderName%",
-				"icon": {
-					"light": "art/folder-gray.svg",
-					"dark": "art/folder-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.copyFileName",
-				"title": "%opened-editors.command.copyFileName%",
-				"icon": {
-					"light": "art/file-gray.svg",
-					"dark": "art/file-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.copyFileNameWithExtension",
-				"title": "%opened-editors.command.copyFileNameWithExtension%",
-				"icon": {
-					"light": "art/file-gray.svg",
-					"dark": "art/file-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.fileTreeGenerator",
-				"title": "%opened-editors.command.fileTreeGenerator%"
-			},
-			{
-				"command": "opened-editors.fold",
-				"title": "%opened-editors.command.fold%",
-				"icon": {
-					"light": "art/collapse-gray.svg",
-					"dark": "art/collapse-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.unfold",
-				"title": "%opened-editors.command.unfold%",
-				"icon": {
-					"light": "art/expand-gray.svg",
-					"dark": "art/expand-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.copyRelativePath",
-				"title": "%opened-editors.command.copyRelativePath%",
-				"icon": {
-					"light": "art/relative-path-gray.svg",
-					"dark": "art/relative-path-white.svg"
-				}
-			},
-			{
-				"command": "opened-editors.copyAbsolutePath",
-				"title": "%opened-editors.command.copyAbsolutePath%",
-				"icon": {
-					"light": "art/absolute-path-gray.svg",
-					"dark": "art/absolute-path-white.svg"
-				}
-			}
-		],
-		"menus": {
-			"explorer/context": [
-				{
-					"when": "explorerResourceIsFolder",
-					"command": "opened-editors.fileTreeGenerator",
-					"group": "9_cutcopypaste"
-				}
-			],
-			"editor/title": [
-				{
-					"command": "opened-editors.formatDocument",
-					"group": "navigation@1",
-					"when": "config.opened-editors.formatDocument && !editorReadonly && !inCompositeEditor"
-				},
-				{
-					"command": "opened-editors.revealSidebar",
-					"group": "navigation@2",
-					"when": "config.opened-editors.revealSidebar"
-				},
-				{
-					"command": "opened-editors.openedEditors",
-					"group": "navigation@3",
-					"when": "config.opened-editors.openedEditors"
-				},
-				{
-					"command": "opened-editors.copyFileName",
-					"group": "navigation@4",
-					"when": "config.opened-editors.copyFileName"
-				},
-				{
-					"command": "opened-editors.copyFolderName",
-					"group": "navigation@5",
-					"when": "config.opened-editors.copyFolderName"
-				},
-				{
-					"command": "opened-editors.copyRelativePath",
-					"group": "navigation@6",
-					"when": "config.opened-editors.copyRelativePath"
-				},
-				{
-					"command": "opened-editors.copyAbsolutePath",
-					"group": "navigation@7",
-					"when": "config.opened-editors.copyAbsolutePath"
-				},
-				{
-					"command": "opened-editors.fold",
-					"group": "navigation@8",
-					"when": "config.opened-editors.foldEnable && foldingEnabled"
-				},
-				{
-					"command": "opened-editors.unfold",
-					"group": "navigation@9",
-					"when": "config.opened-editors.foldEnable && foldingEnabled"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"build": "tsup --config tsup.config.ts --minify",
-		"clean": "rimraf --glob \"*.vsix\" dist",
-		"compile": "tsup --config tsup.config.ts",
-		"lint": "eslint src",
-		"package": "vsce package --no-dependencies",
-		"prebuild": "pnpm run typecheck",
-		"precompile": "pnpm run typecheck",
-		"publish": "vsce publish --no-dependencies",
-		"test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test test/status-bar.test.mjs test/path.test.mjs test/file-tree.test.mjs test/fold.test.mjs",
-		"typecheck": "tsc --noEmit",
-		"vscode:prepublish": "pnpm run build",
-		"watch": "tsup --config tsup.config.ts --watch",
-		"watch:typecheck": "tsc --noEmit --watch"
-	},
-	"devDependencies": {
-		"@types/node": "^26.4.0",
-		"@types/vscode": "^1.100.0",
-		"@vscode/vsce": "^3.9.2",
-		"eslint": "^10.9.1",
-		"rimraf": "^6.1.3",
-		"tsup": "^8.5.1",
-		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.68.0"
-	},
-	"dependencies": {
-		"ignore": "^7.0.6",
-		"tree-dump": "^1.1.0"
-	},
-	"activationEvents": [
-		"onStartupFinished"
-	]
+  "name": "vscode-opened-editors",
+  "displayName": "%ext.displayName%",
+  "version": "2.6.0",
+  "description": "%ext.description%",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "copy file name",
+    "copy folder name",
+    "copy path name",
+    "file name",
+    "filename",
+    "folder name",
+    "opened editors",
+    "path name",
+    "pathname",
+    "reveal sidebar"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xianghongai/vscode-opened-editors/"
+  },
+  "publisher": "NicholasHsiang",
+  "main": "./dist/extension.js",
+  "scripts": {
+    "build": "tsup --config tsup.config.ts --minify",
+    "clean": "rimraf --glob \"*.vsix\" dist",
+    "compile": "tsup --config tsup.config.ts",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "lint": "oxlint src test",
+    "package": "vsce package --no-dependencies",
+    "prebuild": "pnpm run typecheck",
+    "precompile": "pnpm run typecheck",
+    "publish": "vsce publish --no-dependencies",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "vscode:prepublish": "pnpm run build",
+    "watch": "tsup --config tsup.config.ts --watch",
+    "watch:typecheck": "tsc --noEmit --watch"
+  },
+  "dependencies": {
+    "ignore": "^7.0.8",
+    "tree-dump": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "@types/vscode": "~1.100.0",
+    "@vscode/vsce": "^3.9.2",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
+    "rimraf": "^6.1.3",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vitest": "4.1.11"
+  },
+  "contributes": {
+    "configuration": {
+      "title": "Opened Editors",
+      "properties": {
+        "opened-editors.formatDocument": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.formatDocumentDesc%"
+        },
+        "opened-editors.revealSidebar": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.revealSidebarDesc%"
+        },
+        "opened-editors.openedEditors": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.openedEditorsDesc%"
+        },
+        "opened-editors.copyFileName": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.copyFileNameDesc%"
+        },
+        "opened-editors.copyFolderName": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.copyFolderNameDesc%"
+        },
+        "opened-editors.fileTreeExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".*"
+          ],
+          "markdownDescription": "%opened-editors.configuration.fileTreeExcludeDesc%"
+        },
+        "opened-editors.fileTreeGeneratorDepth": {
+          "type": "number",
+          "default": 20,
+          "markdownDescription": "%opened-editors.configuration.fileTreeGeneratorDepthDesc%"
+        },
+        "opened-editors.fileTreeExportType": {
+          "type": "string",
+          "default": "markdown",
+          "enum": [
+            "markdown",
+            "txt"
+          ],
+          "markdownDescription": "%opened-editors.configuration.fileTreeExportTypeDesc%"
+        },
+        "opened-editors.foldEnable": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.foldEnableDesc%"
+        },
+        "opened-editors.fold": {
+          "type": "string",
+          "default": "All",
+          "enum": [
+            "Level 1",
+            "Level 2",
+            "Level 3",
+            "Level 4",
+            "Level 5",
+            "Level 6",
+            "Level 7",
+            "All"
+          ],
+          "markdownDescription": "%opened-editors.configuration.foldDesc%"
+        },
+        "opened-editors.foldSpecial": {
+          "type": "object",
+          "default": {
+            ".ts, .tsx": "Level 1",
+            ".js, .jsx": "Level 1",
+            ".vue": "Level 4",
+            ".json": "Level 2"
+          },
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Level 1",
+                  "Level 2",
+                  "Level 3",
+                  "Level 4",
+                  "Level 5",
+                  "Level 6",
+                  "Level 7",
+                  "All"
+                ]
+              }
+            ]
+          },
+          "markdownDescription": "%opened-editors.configuration.foldSpecialDesc%"
+        },
+        "opened-editors.foldNest": {
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.foldNestDesc%"
+        },
+        "opened-editors.togglePanel": {
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.togglePanel%"
+        },
+        "opened-editors.closeWindow": {
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.closeWindow%"
+        },
+        "opened-editors.openWelcome": {
+          "type": "boolean",
+          "default": false,
+          "description": "%opened-editors.configuration.openWelcome%"
+        },
+        "opened-editors.copyAbsolutePath": {
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.copyAbsolutePath%"
+        },
+        "opened-editors.copyRelativePath": {
+          "type": "boolean",
+          "default": true,
+          "description": "%opened-editors.configuration.copyRelativePath%"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "opened-editors.formatDocument",
+        "title": "%opened-editors.command.formatDocument%",
+        "icon": {
+          "light": "art/format-document-gray.svg",
+          "dark": "art/format-document-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.revealSidebar",
+        "title": "%opened-editors.command.revealSidebar%",
+        "icon": {
+          "light": "art/reveal-gray.svg",
+          "dark": "art/reveal-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.openedEditors",
+        "title": "%opened-editors.command.openedEditors%",
+        "icon": {
+          "light": "art/dropdown-gray.svg",
+          "dark": "art/dropdown-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyPath",
+        "title": "%opened-editors.command.copyPath%",
+        "icon": {
+          "light": "art/folder-gray.svg",
+          "dark": "art/folder-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyFolderName",
+        "title": "%opened-editors.command.copyFolderName%",
+        "icon": {
+          "light": "art/folder-gray.svg",
+          "dark": "art/folder-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyFileName",
+        "title": "%opened-editors.command.copyFileName%",
+        "icon": {
+          "light": "art/file-gray.svg",
+          "dark": "art/file-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyFileNameWithExtension",
+        "title": "%opened-editors.command.copyFileNameWithExtension%",
+        "icon": {
+          "light": "art/file-gray.svg",
+          "dark": "art/file-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.fileTreeGenerator",
+        "title": "%opened-editors.command.fileTreeGenerator%"
+      },
+      {
+        "command": "opened-editors.fold",
+        "title": "%opened-editors.command.fold%",
+        "icon": {
+          "light": "art/collapse-gray.svg",
+          "dark": "art/collapse-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.unfold",
+        "title": "%opened-editors.command.unfold%",
+        "icon": {
+          "light": "art/expand-gray.svg",
+          "dark": "art/expand-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyRelativePath",
+        "title": "%opened-editors.command.copyRelativePath%",
+        "icon": {
+          "light": "art/relative-path-gray.svg",
+          "dark": "art/relative-path-white.svg"
+        }
+      },
+      {
+        "command": "opened-editors.copyAbsolutePath",
+        "title": "%opened-editors.command.copyAbsolutePath%",
+        "icon": {
+          "light": "art/absolute-path-gray.svg",
+          "dark": "art/absolute-path-white.svg"
+        }
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "opened-editors.fileTreeGenerator",
+          "group": "9_cutcopypaste"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "opened-editors.formatDocument",
+          "group": "navigation@1",
+          "when": "config.opened-editors.formatDocument && !editorReadonly && !inCompositeEditor"
+        },
+        {
+          "command": "opened-editors.revealSidebar",
+          "group": "navigation@2",
+          "when": "config.opened-editors.revealSidebar"
+        },
+        {
+          "command": "opened-editors.openedEditors",
+          "group": "navigation@3",
+          "when": "config.opened-editors.openedEditors"
+        },
+        {
+          "command": "opened-editors.copyFileName",
+          "group": "navigation@4",
+          "when": "config.opened-editors.copyFileName"
+        },
+        {
+          "command": "opened-editors.copyFolderName",
+          "group": "navigation@5",
+          "when": "config.opened-editors.copyFolderName"
+        },
+        {
+          "command": "opened-editors.copyRelativePath",
+          "group": "navigation@6",
+          "when": "config.opened-editors.copyRelativePath"
+        },
+        {
+          "command": "opened-editors.copyAbsolutePath",
+          "group": "navigation@7",
+          "when": "config.opened-editors.copyAbsolutePath"
+        },
+        {
+          "command": "opened-editors.fold",
+          "group": "navigation@8",
+          "when": "config.opened-editors.foldEnable && foldingEnabled"
+        },
+        {
+          "command": "opened-editors.unfold",
+          "group": "navigation@9",
+          "when": "config.opened-editors.foldEnable && foldingEnabled"
+        }
+      ]
+    }
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "icon": "art/icon.png",
+  "engines": {
+    "node": ">=24",
+    "vscode": "^1.100.0"
+  },
+  "packageManager": "pnpm@11.24.0"
 }

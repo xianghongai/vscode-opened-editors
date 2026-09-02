@@ -8,14 +8,13 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "sourceMap": true,
-    "rootDir": "src",
-    "outDir": "dist",
     "types": ["node", "vscode"],
     "paths": {
-      "@/*": ["./src/*"],
-    }
+      "@/*": ["./src/*"]
+    },
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "test/**/*", "vitest.config.mts"],
   "exclude": ["node_modules", "dist", "out"]
 }

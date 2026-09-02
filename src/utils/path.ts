@@ -73,10 +73,7 @@ function getWorkspaceFolderPath(): string | null {
   return null;
 }
 
-export function getParentPathOptions(
-  filePath: string,
-  workspaceRoot?: string
-): string[] {
+export function getParentPathOptions(filePath: string, workspaceRoot?: string): string[] {
   const parentPaths: string[] = [];
   let parentPath = dirname(filePath);
   let previousParent = '';
@@ -99,11 +96,7 @@ export function getParentPathOptions(
       return [workspaceName];
     }
 
-    if (
-      relativePath === '..' ||
-      relativePath.startsWith(`..${sep}`) ||
-      isAbsolute(relativePath)
-    ) {
+    if (relativePath === '..' || relativePath.startsWith(`..${sep}`) || isAbsolute(relativePath)) {
       return [];
     }
 
@@ -116,10 +109,7 @@ export function getParentPathOptions(
  * @param args 命令参数
  * @param mode 复制模式：'path' 或 'folder'
  */
-export const copyPath = async (
-  args: readonly unknown[],
-  mode: 'path' | 'folder' = 'path'
-): Promise<void> => {
+export const copyPath = async (args: readonly unknown[], mode: 'path' | 'folder' = 'path'): Promise<void> => {
   const filePath = getPath(args);
   if (!filePath) {
     return;

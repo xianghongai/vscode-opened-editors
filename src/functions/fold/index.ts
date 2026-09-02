@@ -1,20 +1,12 @@
 import { workspace, commands } from 'vscode';
 import { extname } from 'path';
-import { getPath } from '../../utils/path';
+import { getPath } from '@/utils/path';
 
 // 常量定义
 const MAX_FOLD_LEVEL = 7; // VS Code 支持的最大折叠层级
 
 // 类型定义
-type FoldLevel =
-  | 'Level 1'
-  | 'Level 2'
-  | 'Level 3'
-  | 'Level 4'
-  | 'Level 5'
-  | 'Level 6'
-  | 'Level 7'
-  | 'All';
+type FoldLevel = 'Level 1' | 'Level 2' | 'Level 3' | 'Level 4' | 'Level 5' | 'Level 6' | 'Level 7' | 'All';
 
 const FOLD_COMMANDS: Record<FoldLevel, string> = {
   'Level 1': 'editor.foldLevel1',
