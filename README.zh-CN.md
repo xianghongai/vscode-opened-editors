@@ -18,37 +18,37 @@
   </a>
 </p>
 
-**English** | [中文](./README.zh-CN.md)
+[English](./README.md) | **中文**
 
 ![ScreenShots](https://raw.githubusercontent.com/caringrun/assets/master/vscode-opened-editors.gif)
 
-Keyboard shortcuts are not bound by default — bind them as you need.
+快捷键自行按需绑定。
 
-## Editor Title Menu
+## 标题菜单栏
 
-- `Opened Editors: Reveal In Side Bar` - Reveal the current file in the side bar
-- `Opened Editors: Opened Editors` - List the opened editors
-- `Opened Editors: Copy File Name` - Copy the file name
-- `Opened Editors: Copy Folder Name` - Copy the folder name (copies the parent folder name, a different level can be picked)
-- `Opened Editors: Copy Relative Path` - Copy the relative path (relative to the workspace folder)
-- `Opened Editors: Copy Absolute Path` - Copy the absolute path (the full path of the file)
-- `Opened Editors: Fold` - Fold (the fold level can be configured per language)
-- `Opened Editors: Unfold` - Unfold
-- `Opened Editors: Format Document` - Format the document
+- `Opened Editors: Reveal In Side Bar` - 在侧边栏中显示 (文件在侧边栏资源中的位置)
+- `Opened Editors: Opened Editors` - 已打开的编辑器列表
+- `Opened Editors: Copy File Name` - 复制文件名
+- `Opened Editors: Copy Folder Name` - 复制目录名 (复制父层文件夹名，可选择不同层级)
+- `Opened Editors: Copy Relative Path` - 复制相对路径 (相对于工作区文件夹的路径)
+- `Opened Editors: Copy Absolute Path` - 复制绝对路径 (文件的完整路径)
+- `Opened Editors: Fold` - 折叠 (可在配置中设定不同语言类型的折叠层级)
+- `Opened Editors: Unfold` - 展开
+- `Opened Editors: Format Document` - 格式化文档
 
-## Commands
+## 命令
 
-- `Opened Editors: Copy Path` - Copy the file path (a different level can be picked)
+- `Opened Editors: Copy Path` - 复制文件路径 (可选择不同层级)
 
-## Explorer Context Menu
+## 资源右键菜单
 
-- `Opened Editors: File Tree Generator` - Generate a file tree (right-click a folder in the side bar to copy its tree structure)
+- `Opened Editors: File Tree Generator` - 文件结构树 (侧边栏右键复制目录树结构)
 
-## Status Bar
+## 状态栏
 
-- `Close Window` - Close the current VS Code window (useful in full-screen mode on macOS)
-- `Toggle Panel` - Toggle the bottom panel
-- `Open Welcome` - Open the Welcome page (hidden by default, can be enabled in the settings)
+- `Close Window` - 关闭当前 VS Code 窗口 (在 macOS 全屏模式下用到)
+- `Toggle Panel` - 切换底部面板
+- `Open Welcome` - 打开欢迎页面（默认隐藏，可在设置中启用）
 
 ---
 
