@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## v2.7.0 (2026-09-03)
+
+- Unify packaging and publishing scripts to `vsce:package` and `vsce:publish`
+- Update GitHub Actions CI workflow to use `pnpm run vsce:publish`
+- Migrate toolchain and test suite to oxlint, oxfmt, and Vitest
+
 ## v2.6.0 (2026-08-27)
 
 ### 新增功能

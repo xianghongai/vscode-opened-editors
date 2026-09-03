@@ -12,7 +12,7 @@ This repository contains a bundled TypeScript VS Code extension. `src/extension.
 - `pnpm test` runs the Node test suite.
 - `pnpm run lint` enforces oxlint rules and `pnpm run format` / `pnpm run format:check` apply oxfmt; `pnpm run typecheck` runs strict TypeScript without emitting files.
 - `pnpm run build` creates the minified production bundle.
-- `pnpm run package` creates a VSIX locally; never run `publish` without explicit release authorization.
+- `pnpm run vsce:package` creates a VSIX locally; never run `vsce:publish` without explicit release authorization.
 
 ## Coding Style & Naming Conventions
 

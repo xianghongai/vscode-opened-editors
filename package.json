@@ -1,7 +1,7 @@
 {
   "name": "vscode-opened-editors",
   "displayName": "%ext.displayName%",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "%ext.description%",
   "categories": [
     "Other"
@@ -32,12 +32,12 @@
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "lint": "oxlint src test",
-    "package": "vsce package --no-dependencies",
     "prebuild": "pnpm run typecheck",
     "precompile": "pnpm run typecheck",
-    "publish": "vsce publish --no-dependencies",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
+    "vsce:package": "vsce package --no-dependencies",
+    "vsce:publish": "vsce publish --no-dependencies",
     "vscode:prepublish": "pnpm run build",
     "watch": "tsup --config tsup.config.ts --watch",
     "watch:typecheck": "tsc --noEmit --watch"
@@ -47,15 +47,15 @@
     "tree-dump": "^1.1.0"
   },
   "devDependencies": {
-    "@types/node": "^26.4.0",
-    "@types/vscode": "~1.100.0",
+    "@types/node": "^24.13.3",
+    "@types/vscode": "1.100.0",
     "@vscode/vsce": "^3.9.2",
     "oxfmt": "^0.65.0",
-    "oxlint": "^1.80.0",
+    "oxlint": "^1.81.0",
     "rimraf": "^6.1.3",
     "tsup": "^8.5.1",
-    "typescript": "^6.0.3",
-    "vitest": "4.1.11"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   },
   "contributes": {
     "configuration": {
@@ -350,9 +350,12 @@
     "onStartupFinished"
   ],
   "icon": "art/icon.png",
+  "galleryBanner": {
+    "color": "#0f172a",
+    "theme": "dark"
+  },
   "engines": {
-    "node": ">=24",
     "vscode": "^1.100.0"
   },
-  "packageManager": "pnpm@11.24.0"
+  "packageManager": "pnpm@11.25.0"
 }
