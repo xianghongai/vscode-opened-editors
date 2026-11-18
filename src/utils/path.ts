@@ -1,4 +1,4 @@
-import { window, env, workspace } from 'vscode';
+import { window, env, workspace, type WorkspaceFolder } from 'vscode';
 import { basename, dirname, sep, isAbsolute, join, relative } from 'path';
 
 /**
@@ -142,57 +142,86 @@ export const copyPath = async (args: readonly unknown[], mode: 'path' | 'folder'
 };
 
 /**
- * 复制文件的绝对路径到剪贴板
+ * 无活动文件时，获取工作区文件夹可复制的路径
+ * @param mode 复制模式：绝对路径或文件夹名
+ * @returns 要复制的路径；无文件夹、用户取消时返回 undefined
+ */
+async function getFallbackWorkspacePath(mode: 'absolute' | 'relative'): Promise<string | undefined> {
+  const folders = workspace.workspaceFolders;
+
+  if (!folders || folders.length === 0) {
+    return undefined;
+  }
+
+  let folder: WorkspaceFolder | undefined = folders[0];
+
+  if (folders.length > 1) {
+    const selected = await window.showQuickPick(
+      folders.map((candidate) => candidate.uri.fsPath),
+      { placeHolder: 'select a workspace folder:' }
+    );
+
+    if (!selected) {
+      return undefined;
+    }
+
+    folder = folders.find((candidate) => candidate.uri.fsPath === selected);
+  }
+
+  if (!folder) {
+    return undefined;
+  }
+
+  return mode === 'absolute' ? folder.uri.fsPath : basename(folder.uri.fsPath);
+}
+
+/**
+ * 复制文件的绝对路径到剪贴板；没有活动文件时复制工作区文件夹的绝对路径
  */
 export const copyAbsolutePath = async (): Promise<void> => {
-  const activeTextEditor = window.activeTextEditor;
+  const document = window.activeTextEditor?.document;
 
-  if (!activeTextEditor) {
+  if (document && document.uri.scheme === 'file') {
+    await env.clipboard.writeText(document.fileName);
     return;
   }
 
-  const { document } = activeTextEditor;
+  const fallbackPath = await getFallbackWorkspacePath('absolute');
 
-  if (document.uri.scheme !== 'file') {
+  if (fallbackPath === undefined) {
     return;
   }
 
-  const absolutePath = document.fileName;
-  await env.clipboard.writeText(absolutePath);
+  await env.clipboard.writeText(fallbackPath);
 };
 
 /**
- * 复制文件的相对路径到剪贴板（相对于工作区文件夹）
+ * 复制文件的相对路径到剪贴板（相对于工作区文件夹）；没有活动文件时复制工作区文件夹名
  */
 export const copyRelativePath = async (): Promise<void> => {
-  const activeTextEditor = window.activeTextEditor;
+  const document = window.activeTextEditor?.document;
 
-  if (!activeTextEditor) {
+  if (document && document.uri.scheme === 'file') {
+    if (!workspace.workspaceFolders) {
+      return;
+    }
+
+    const folder = workspace.getWorkspaceFolder(document.uri);
+
+    if (!folder) {
+      return;
+    }
+
+    // 使用 path.relative 计算相对路径，避免跨平台问题
+    await env.clipboard.writeText(relative(folder.uri.fsPath, document.fileName));
     return;
   }
 
-  const { document } = activeTextEditor;
+  const fallbackPath = await getFallbackWorkspacePath('relative');
 
-  if (document.uri.scheme !== 'file') {
+  if (fallbackPath === undefined) {
     return;
   }
 
-  if (!workspace.workspaceFolders) {
-    return;
-  }
-
-  const resource = document.uri;
-  const folder = workspace.getWorkspaceFolder(resource);
-
-  if (!folder) {
-    return;
-  }
-
-  const absolutePath = document.fileName;
-  const workspaceFolderPath = folder.uri.fsPath;
-
-  // 使用 path.relative 计算相对路径，避免跨平台问题
-  const relativePath = relative(workspaceFolderPath, absolutePath);
-
-  await env.clipboard.writeText(relativePath);
+  await env.clipboard.writeText(fallbackPath);
 };

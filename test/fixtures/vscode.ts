@@ -5,6 +5,7 @@
  * 而不是真实 API。类型按替身实际暴露的契约写，刻意不去实现 `@types/vscode` 的完整接口，
  * 那既做不到也无必要；测试只断言这里记录下来的调用。
  */
+import { sep } from 'node:path';
 
 /** `window.createStatusBarItem()` 返回的替身。 */
 export interface FakeStatusBarItem {
@@ -25,8 +26,13 @@ export interface FakeStatusBarItem {
 interface FakeTextEditor {
   document: {
     fileName: string;
-    uri: { scheme: string };
+    uri: { scheme: string; fsPath: string };
   };
+}
+
+/** `workspace.workspaceFolders` 替身，只保留被测代码读取的字段。 */
+export interface FakeWorkspaceFolder {
+  uri: { fsPath: string };
 }
 
 interface ConfigurationChangeEvent {
@@ -43,11 +49,13 @@ export const createdStatusBarItems: FakeStatusBarItem[] = [];
 export const clipboardWrites: string[] = [];
 export const executedCommands: string[] = [];
 export const shownErrorMessages: string[] = [];
+export const shownQuickPickItems: string[][] = [];
 export const statusBarMessages: string[] = [];
 const configurationListeners: ConfigurationListenerEntry[] = [];
 const configurationValues = new Map<string, unknown>();
 let clipboardWriteImplementation: (value: string) => Promise<void> = () => Promise.resolve();
 let commandExecutionImplementation: (command: string) => Promise<void> = () => Promise.resolve();
+let quickPickResult: string | undefined;
 
 export const StatusBarAlignment = {
   Right: 2,
@@ -58,6 +66,12 @@ export class StatusBarItem {}
 export class WorkspaceConfiguration {}
 
 export const workspace = {
+  workspaceFolders: undefined as FakeWorkspaceFolder[] | undefined,
+  getWorkspaceFolder(uri: { fsPath: string }) {
+    return workspace.workspaceFolders?.find(
+      (folder) => uri.fsPath === folder.uri.fsPath || uri.fsPath.startsWith(`${folder.uri.fsPath}${sep}`)
+    );
+  },
   getConfiguration(section?: string) {
     return {
       get(key: string, defaultValue?: unknown) {
@@ -91,6 +105,10 @@ export const commands = {
 
 export const window = {
   activeTextEditor: undefined as FakeTextEditor | undefined,
+  showQuickPick(items: readonly string[]) {
+    shownQuickPickItems.push([...items]);
+    return Promise.resolve(quickPickResult);
+  },
   createStatusBarItem(id: string, alignment: number, priority: number): FakeStatusBarItem {
     const item: FakeStatusBarItem = {
       id,
@@ -153,17 +171,26 @@ export function setCommandExecutionImplementation(implementation: (command: stri
   commandExecutionImplementation = implementation;
 }
 
-export function setActiveTextEditor(fileName?: string) {
+export function setActiveTextEditor(fileName?: string, scheme = 'file') {
   window.activeTextEditor = fileName
     ? {
         document: {
           fileName,
           uri: {
-            scheme: 'file',
+            scheme,
+            fsPath: fileName,
           },
         },
       }
     : undefined;
+}
+
+export function setWorkspaceFolders(paths?: readonly string[]) {
+  workspace.workspaceFolders = paths?.map((fsPath) => ({ uri: { fsPath } }));
+}
+
+export function setQuickPickResult(result: string | undefined) {
+  quickPickResult = result;
 }
 
 export function resetVscodeTestState() {
@@ -171,10 +198,13 @@ export function resetVscodeTestState() {
   clipboardWrites.length = 0;
   executedCommands.length = 0;
   shownErrorMessages.length = 0;
+  shownQuickPickItems.length = 0;
   statusBarMessages.length = 0;
   configurationListeners.length = 0;
   configurationValues.clear();
   clipboardWriteImplementation = () => Promise.resolve();
   commandExecutionImplementation = () => Promise.resolve();
+  quickPickResult = undefined;
+  workspace.workspaceFolders = undefined;
   window.activeTextEditor = undefined;
 }

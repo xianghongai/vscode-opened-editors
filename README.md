@@ -30,8 +30,8 @@ Keyboard shortcuts are not bound by default — bind them as you need.
 - `Opened Editors: Opened Editors` - List the opened editors
 - `Opened Editors: Copy File Name` - Copy the file name
 - `Opened Editors: Copy Folder Name` - Copy the folder name (copies the parent folder name, a different level can be picked)
-- `Opened Editors: Copy Relative Path` - Copy the relative path (relative to the workspace folder)
-- `Opened Editors: Copy Absolute Path` - Copy the absolute path (the full path of the file)
+- `Opened Editors: Copy Relative Path` - Copy the relative path (relative to the workspace folder; when no file is open, copies the workspace folder name)
+- `Opened Editors: Copy Absolute Path` - Copy the absolute path (the full path of the file; when no file is open, copies the workspace folder path)
 - `Opened Editors: Fold` - Fold (the fold level can be configured per language)
 - `Opened Editors: Unfold` - Unfold
 - `Opened Editors: Format Document` - Format the document
