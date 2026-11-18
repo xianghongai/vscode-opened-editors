@@ -43,7 +43,7 @@
     "watch:typecheck": "tsc --noEmit --watch"
   },
   "dependencies": {
-    "ignore": "^7.0.8",
+    "ignore": "^7.0.9",
     "tree-dump": "^1.1.0"
   },
   "devDependencies": {
