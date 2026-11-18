@@ -1,7 +1,7 @@
 {
   "name": "vscode-opened-editors",
   "displayName": "%ext.displayName%",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "%ext.description%",
   "categories": [
     "Other"

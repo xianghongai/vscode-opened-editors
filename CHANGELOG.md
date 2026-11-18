@@ -2,6 +2,11 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## v2.7.2 (2026-11-18)
+
+- Copy the workspace folder absolute path or folder name when no file is open
+- Prompt for a folder in multi-root workspaces when no file is open
+
 ## v2.7.1 (2026-09-03)
 
 - Publish extension to Open VSX Registry alongside the VS Code Marketplace
